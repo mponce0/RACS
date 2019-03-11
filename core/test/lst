@@ -1,0 +1,8 @@
+countReads.sh
+table.sh
+comb_tables.sh
+intergenic/interGenes.sh
+intergenic/interGeneRegions.R
+intergenic/det-interGenes.sh
+auxs/testFns.sh
+auxs/auxFns.sh

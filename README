@@ -1,0 +1,358 @@
+RACS: Rapid Analysis of ChIP-Seq data for contig based genomes
+
+These tools are a serie of scripts developed to facilitate the analysis
+of ChIP-Seq data and has been applied to the organism T. Thermophila.
+
+The scripts should work in any Linux-type OS (ie. Mac OS and Linux OS).
+It requires to have installed the following programs:
+	- SAMtools
+	- BWA
+	- R
+
+The first two are needed for the determination of reads in open region frames -ORF- (genic regions).
+While SAMtools and R are needed for the determination of intergenic regions -IGR-.
+
+The main scripts are located in the "core" directory.
+Additionally we provide other subdirectories containing the following:
+	- "hpc": submission scripts for typical job managers and schedulers in HPC environments
+	- "tools": comparison tools developed to compare against other software, eg. MACS
+	- "datasets": examples of the data used to test and run our pipeline
+
+This pipeline is open source under the MIT license, and researchers are welcome to use it.
+We will appreciate if users can let us know if they found bugs or could provide feedback about
+its use and experience using RACS.
+Please cite our paper (CITE_RACS) when ever you are using RACS.
+
+
+
+* INSTALLATION
+
+The scripts composing this pipeline, are available as open source tools,
+and can be obtained from any of the following repositories:
+
+	 https://gitrepos.scinet.utoronto.ca/public/RACS.git
+
+or
+
+	https://bitbucket.org/mjponce/racs
+
+Both repositories are synchronized, so that the latest version of RACS will be avaialble in both
+repositiories simultaneously.
+
+To obtain and install a copy of RACS in your computer, open a terminal (you will need git and
+a internet connection!) and type:
+
+	git clone  https://gitrepos.scinet.utoronto.ca/public/RACS.git
+
+that should clone (download and copy) the latest version of our pipeline in your computer,
+creating a directory called "RACS", containing the following files and sub-directories:
+
+``
+RACS
+ ├── AUTHORS
+ ├── CITATION
+ ├── LICENSE
+ ├── README
+ ├── WARRANTY
+ ├── core
+ |   └── countReads.sh
+ |   └── table.sh
+ |   └── comb_tables.sh
+ |   └── auxs
+ |   |    ├── auxFns.sh
+ |   |    └── testFns.sh
+ |   └── intergenic
+ |   |    ├── det-interGenes.sh
+ |   |    ├── interGeneRegions.R
+ |   |    └── interGenes.sh
+ |   └── test
+ |        └── lst
+ ├── datasets
+ |   └── 
+ |   └── 
+ |   └── 
+ ├── hpc
+ │   └── submission.pbs
+ |   └── submission.slurm
+ |   └── IGR-jobs_parallel.gnu
+ |   └── modules
+ └── tools
+     └── 
+     └── 
+     └── 
+''
+
+
+Updating RACS:
+Because the RACS pipeline is available under version control (git), you can easily get updates
+and the latest additions to the RACS pipeline, by simply typing the following command in the
+RACS directory:
+
+	git pull
+
+This will bring into your local installation the latest updates to the pipeline.
+Similarly, any of the git functionalities should work as expected, eg. git log, git status, etc.
+
+
+
+* Integrity checks
+For integrity purposes we have included a series of tools to check whether internal scripts'
+dependencies, as well as, external programs are available in the system so that RACS functionality
+is guaranteed.
+Some of RACS routines will run this integrity checks when ever appropriate at the moment of execution.
+The user can also test this, by executing the following command in the shell:
+
+  PATHtoRACSrepo/core/auxs/testFns.sh
+
+at this point a series of checks will be executed and the results shown in the screen, eg.
+
+*** CHECKING RACS pipeline INTERNAL INTEGRITY...
+         countReads.sh ... ok!
+         table.sh ... ok!
+         comb_tables.sh ... ok!
+         intergenic/interGenes.sh ... ok!
+         intergenic/interGeneRegions.R ... ok!
+         intergenic/det-interGenes.sh ... ok!
+         auxs/testFns.sh ... ok!
+         auxs/auxFns.sh ... ok!
+*** CHECKING EXTERNAL DEPENDENCIES with auxiliary software: BWA, SAMTOOLS & RSCRIPT...
+         bwa ... found!
+         samtools ... found!
+         Rscript ... found!
+
+If either one of the dependencies is not meet an error message describing the issue will be displayed,
+followed by the basic instructions in how to use RACS.
+
+
+
+* HOW TO USE THE 'racs' PIPELINE:
+
+RACS offers two main functionalities:
+- count reads in ORF
+and
+- identify reads in intergenic regions (using information about the biology of the model)
+
+
+* Counting Reads in ORF:
+
+- "countReads": countReads.sh is the main script in the pipeline, it is a shell
+  script in charge of implementing and distributing the actual pipeline to count
+the reads. It combines several instances of shell commands and offloads
+to the packages SAMtools and BWA.
+This script can utilize multi-core parallelization when possible via threads
+which can be explicitly input by the user or automatically detected by the script.
+
+At the end of the execution the script will produce a table indicating XXXXX.
+The resulting files, some intermediate files and the final tables, are located
+in a directory created in the directory from where the script is executed named
+'ORF_RACS_results-YYYYMMDD-HHMMSS' where 'YYYYMMDD-HHMMSS' indicates the year-month-day
+and time when the script was executed.
+
+
+Inputs:
+	- INPUT file (fastq.gz)
+	- IP file (fastq.gz)
+	- fasta assembly file (.fasta)
+	- reference genome file (.gff3)
+
+Outputs:
+	- several sam, bam and bai files for each input (INPUT and IP) files
+	- intermediate tables with reads for INPUT and IP files, named 'tableReads{INPUT/IP}.{input/ip-filename}'
+	- final table sorted by scaffold and localization within the scaffold,
+	named 'FINAL.table.{INPUTfilename}-{IPfilename}
+
+
+When executing the scripts, please indicate the full path to the location of
+the script.  In this way the script will determine where the repository is
+located and find the different tools needed during the execution.
+Also, please do not "source" the scripts, they are set to be run as executable scripts,
+ie. execute the scripts in this way,
+
+	PATHtoRACS/core/../scriptNAME.sh  args
+
+do *NOT* execute them in this way,
+
+	. PATHtoRACS/core/../scriptNAME.sh  args
+
+NOR in this way neither,
+
+	source PATHtoRACS/core/../scriptNAME.sh  args
+
+Our scripts will also try to detect this situation and prevent the user from doing this.
+Due to the modular implementation we designed for RACS, and in order to allow RACS
+locating their main components, we need to have the scripts executed as described above
+and not sourced.
+
+
+Integrity & Sanity Checks
+In each of the main RACS scripts we have incorporated several integrity checks which
+are run at the very beginning of the scripts' execution. These tests include
+determining whether the tools used (eg. BWA, SAMTOOLS or R) are installed in the
+system and available for being used within the pipeline.
+Similarly, by checking the location of the script, the pipeline verifies that the
+other components of the pipeline are also in place and can be found so that the pipeline
+can run without any problems.
+In this way, there is no need to add the different scripts of the pipeline to the
+PATH and the scripts are selfaware of where they are placed.
+For achieving this, the scripts will need to be called specifying its full location in the computer.
+
+The different scripts in the pipeline will also check that the arguments specified,
+in particular when these suppose to be existent files, they actually are!
+We basically tried our best to implement defensive programming all across the different scripts
+that compose the RACS pipeline, to protect its proper execution and help the user to establish
+the proper way of using RACS.
+We also included a simple testing routine, in the 'aux' subdir, that can be used to run
+some of the integrity tests that the pipeline will be checking during execution,
+as described in the section above.
+
+
+Arguments to the script:
+  1st argument: file with INPUT reads, usually a ".fasta.gz" file, obtained from the sequencer 
+  2nd argument: file with IP reads, usually a ".fasta.gz" file, obtained from the sequencer 
+  3rd argument: reference genome file (fasta)
+  4th argument: annotation file (gff3)
+  5th argument: working space (if possible use RAMdisk --ie. /dev/shm/--, or
+	/tmp in a computer with SSD)
+  6th argument (optional): number of cores to use for BWA multi-threading.
+	If this argument is not specified, the script will attempt to determine
+	automatically the number of cores and use that number to run in multi-threading.
+	If you want to run the script serially, ie. with just one core, you should
+	set this argument to 1.
+
+
+The main output file, FINAL.table."INPUTfile"-"IPfile"
+(where "INPUTfile" and "IPfile" refer to the corresponding INPUT and IP files),
+is ordered by the scaffold localization.
+Notice that this file <<FINAL.table."INPUTfile"-"IPfile">>, is the one that
+will be used in the second part of the pipeline when detecting the intergenic regions.
+This final file is a CSV text file containing the following columns:
+
+	location	name	description	geneSize	INPUT.reads	IP.reads
+
+where
+  "location" is the scaffold location of the gene
+  "name" is the name of the gene
+  "description" is a description of the gene
+  "geneSize" represents the size of the gene
+  "INPUT.reads" is the number of reads (calls) for the INPUT file
+  "IP.reads" is the number of reads (calls) for the IP file
+
+
+
+* Normalization of ORF by PF Cluster Scores
+If your data contains the Passing Filter (PF) Cluster scores, you can use an additional shell script 
+that we have included to normalize your INPUT/IP-reads.
+This script is called "normalizedORF.sh" and is located in the core subdirectory.
+The script requires three mandatory arguments:
+	1st argument: "FINAL.table.*"  file generated from the RACS' ORF pipeline
+	2nd argument: "PF-INPUT-value"  PF value correspoding to the INPUT file
+	3rd argument: "PF-IP-value"  PF value correspoding to the IP file
+
+Please notice that arguments 2 and 3, are the acutal numerical values corresponding to the PF clusters
+for the INPUT and IP respectively.
+
+
+* Determination of InterGenic Regions
+The second main functionality of our RACS pipeline is the ability to determine
+intergenic regions based on the results from the ORF reads and the biology of the
+model organism.
+For achieving this second part, we combined a series of shell scripts and R scripts.
+Similarly as before the pipeline when executed will perform some sanity and integrity
+checks to guarantee that all the necessary pieces are in place.
+All the scripts for this part of the pipeline are located in the 'intergenic' subdir.
+The flow's director is a simple shell script, 'det-interGenes.sh', which will receive
+four command line arguments and call an R script, 'interGenicRegions.R' and
+a second shell script by the end of the execution, 'interGenes.sh'.
+The R script, 'interGenicRegions.R', is the actual brain and main script in charge of
+determining regions among genic boundaries.
+It is designed in a modular fashion, implementing the script in a main driver script
+(the 'interGenicRegions.R' itself) and an utility file where all the functions used in
+the main driver are defined.
+The second shell script, 'interGenes.sh', is in charge of computing the number of
+reads/calls within the determined intergenic regions, for which it also uses SAMtools.
+The main shell script, keeps track of the time employed in each stage of the process,
+and offers a summary of it at the end of the execution.
+
+Arguments to the script:
+	arg1: final combined table generated by the ORF from the RACS pipeline
+	arg2: reference genome file (gff3)
+	arg3: name of the file where to save the InterGenic Regions
+	arg4: text file containing the name of the output file from ORF part/tag.(ref.) name; eg.
+		alnDATASET_INDICATORS_ChIP_SXX_RY_ZZZ.fastq.gz-sorted.bam
+		alnDATASET_INDICATORS_Input_SXX_RY_ZZZ.fastq.gz-sorted.bam
+
+
+
+
+
+Examples:
+I) calling peaks for ORF
+I.i) the following command will run the countReads.sh script using:
+	- 'data2/_1_MED1_INPUT_S25_L007_R1_001.fasta.gz'  as the file with the INPUT reads
+	- 'data2/_3_MED1_IP_S27_L007_R1_001.fasta.gz' as the file with IP reads
+	- 'T_thermophila_June2014_assembly.fasta' as the reference genome for the T.Thermophila organism
+	- 'T_thermophila_June2014.gff3' as the annotation file for the T.Thermophila
+	- '/tmp/' as working space
+
+	PATHtoRACSrepo/core/countReads.sh   data2/_1_MED1_INPUT_S25_L007_R1_001.fastq.gz  data2/_3_MED1_IP_S27_L007_R1_001.fastq.gz  T_thermophila_June2014_assembly.fasta  T_thermophila_June2014.gff3  /tmp/ 
+
+
+I.ii) the following command will run the countReads.sh script using the same
+arguments as before but it is specifying to use "/dev/shm" (RAMdisk) instead
+of "/tmp" as temporary storage for auxiliary files, and 16 threads in the
+parallel regions of the pipeline.
+Additionally it is using the system's 'time' command to time how long the
+pipeline takes to run.
+
+	time  PATHtoRACSrepo/core/countReads.sh   data2/_1_MED1_INPUT_S25_L007_R1_001.fastq.gz  data2/_3_MED1_IP_S27_L007_R1_001.fastq.gz  T_thermophila_June2014_assembly.fasta  T_thermophila_June2014.gff3  /dev/shm/  16
+
+
+II) Determination of InterGenic Regions (IGR)
+II.i) the following command will determine the intergenic regions, using:
+	- 'combinedTABLES_MED1-MED2' as the table which was determined in the ORF part of the pipeline
+	- 'dataset/T_thermophila_June2014.sorted.gff3' as the micro-organism reference genome file
+	- 'interGENs_MED1-MED2.csv' is the name of the table that the IGR part of the pipeline will
+		generate, ie. this will be the output of this part of the pipeline
+	- 'samples.file' is a text file containing the name of the BAM output file, also generated when
+		running the ORF part from RACS; they are usually named as
+                alnDATASET_INDICATORS_ChIP_SXX_RY_ZZZ.fastq.gz-sorted.bam
+                alnDATASET_INDICATORS_Input_SXX_RY_ZZZ.fastq.gz-sorted.bam
+
+	PATHtoRACSrepo/core/intergenic/det-interGenes.sh  combinedTABLES_MED1-MED2  dataset/T_thermophila_June2014.sorted.gff3  interGENs_MED1-MED2.csv  samples.file
+
+
+II.ii) we included a submission script in the 'hpc' directory, named "IGR-jobs_parallel.gnu",
+which will basically scan the current directory digging for sub-directories named "ORF_RACS_*",
+which is the way RACS will name the outcome from running the RACS' ORF pipeline.
+When the script detects one of these directories, it will look inside it and will generate the
+corresponding 'samples.file' containing the name of all the aln*fastq.gz-sorted.bam files within
+this directory.
+When the search for ORF sub-directories is done, it will launch the IGR part of the pipeline in
+*parallel* for ALL the IGR results using an 'embarrassingly parallel' approach via GNU-Parallel.
+Assuming you are located in a directory containing several ORF sub-directories, you will just run it
+in this way,
+
+	PATHtoRACSrepo/hpc/IGR-jobs_parallel.gnu
+
+In principle the script does not require any command line argument, but it contains several environment
+variables defined that should be adjusted for the particular system where it will run.
+Ie.
+	- RACSloc="location where RACS is installed in your system"
+	- REFgff3="location where the genome reference file of the organism is located in your system"
+
+Additionally one could adjust the following variables:
+	- PARALLEL_TASKS_PER_NODE="number of parallel jobs to run at the same time", although
+		by the default the script will try to determine the maximum number of cores available
+		on the system
+	- ORFdirs="ORF_RACS_results-", matching pattern for the beginning of the directories generated
+		by the RACS' ORF
+
+
+III) normalization and cut-off with negative control
+
+
+IV) normalization and cut-off without a negative control
+
+
+V) comparison to MACS and XXXX
+
