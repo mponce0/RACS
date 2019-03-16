@@ -13,7 +13,7 @@
 #   - 1st argument: "FINAL.table.*"  file from RACS' ORF pipeline
 #   - 2nd argument: "PF-INPUT-value"  PF value correspoding to the INPUT file
 #   - 3rd argument: "PF-IP-value"  PF value correspoding to the IP file
-#   - 4th argument: 'A' or 'D' (OPTIONAL), when this 4th argument is specified, an additiona table is created being ordered with respect to the IP/INPUT ratio, in "A"scending or "D"ecreasing order 
+#   - 4th argument: 'A' or 'D' (OPTIONAL), when this 4th argument is specified, an additional table is created being ordered with respect to the IP/INPUT ratio, in "A"scending or "D"ecreasing order 
 #
 #
 # Example:
