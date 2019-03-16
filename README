@@ -68,9 +68,10 @@ RACS
  |   └── test
  |        └── lst
  ├── datasets
- |   └── 
- |   └── 
- |   └── 
+ |   └── PostProcessing_Genic.xlsx
+ |   └── PostProcessing_Intergenic.xlsx
+ |   └── IBD1_ORF.xlsx
+ |   └──IBD1_Intergenic.xlsx
  ├── hpc
  │   └── submission.pbs
  |   └── submission.slurm
@@ -350,9 +351,28 @@ Additionally one could adjust the following variables:
 
 III) normalization and cut-off with negative control
 
+We provide a shell script that can be used for normalizing and dealing with the
+cut-offs when your data includes wild-types or negative controls. 
+The script can be found in the core directory, and is named "normalizeORG.sh".
+It requires 3 arguments:
+   - 1st argument: "FINAL.table.*"  file from RACS' ORF pipeline
+   - 2nd argument: "PF-INPUT-value"  PF value correspoding to the INPUT file
+   - 3rd argument: "PF-IP-value"  PF value correspoding to the IP file
+   - 4th argument: 'A' or 'D' (OPTIONAL), when this 4th argument is specified, an additional table is created being ordered with respect to the IP/INPUT ratio, in "A"scending or "D"ecreasing order 
+
+       PATHtoRACS/core/normalizeORF.sh  FINAL.table.XXXX  14694464  10148171 
+       PATHtoRACS/core/normalizeORF.sh  FINAL.table.XXXX  14694464  10148171  A
+
+Alternatively one could use a couple of spreadsheets available in the 'datasets'
+directory, if the user prefers to proceed in an interactive manner.
+See,
+	datasets/PostProcessing_Genic.xlsx
+	datasets/PostProcessing_Intergenic.xlsx
+
 
 IV) normalization and cut-off without a negative control
+	--- in prep. ---
 
 
-V) comparison to MACS and XXXX
-
+V) comparison to MACS and Other Tools 
+	--- in prep. ---
