@@ -3,7 +3,9 @@
 
 # command-line arguments
 FILE=$1
-#FILE=T_thermophila_June2014.gff3
+# eg. FILE=T_thermophila_June2014.gff3
+
+# filterS can be modified/added depending on the "TARGET" organism and 'protein'
 filter1=gene
 filter2="Name=TTHERM_"
 #filter3='"hypothetical protein"'
