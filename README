@@ -30,7 +30,7 @@ Please cite our paper (CITE_RACS) when ever you are using RACS.
 The scripts composing this pipeline, are available as open source tools,
 and can be obtained from any of the following repositories:
 
-	 https://gitrepos.scinet.utoronto.ca/public/RACS.git
+	https://gitrepos.scinet.utoronto.ca/public/?a=summary&p=RACS
 
 or
 
@@ -42,7 +42,7 @@ repositiories simultaneously.
 To obtain and install a copy of RACS in your computer, open a terminal (you will need git and
 a internet connection!) and type:
 
-	git clone  https://gitrepos.scinet.utoronto.ca/public/RACS.git
+	git clone https://gitrepos.scinet.utoronto.ca/public/RACS.git
 
 that should clone (download and copy) the latest version of our pipeline in your computer,
 creating a directory called "RACS", containing the following files and sub-directories:
