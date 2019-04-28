@@ -49,6 +49,7 @@ load.data <- function(filename,spix=1) {
 
 # function to check whether a package is available in the system
 loadCheckPkg <- function(pckgs){
+	fail = FALSE
 	for (pckg in pckgs) {
 		# check whether the package is NOT loaded
 		if (! paste('package:',pckg,sep="") %in% search()) {
@@ -58,11 +59,14 @@ loadCheckPkg <- function(pckgs){
 				cat("Loading library",pckg,"... \n")
 				library(pckg, character.only=TRUE)
 			} else {
-				msg <- paste("Package:",pckg, "not found! You need to install this package using",paste("install.package('",pckg,"')",sep=""))
-				stop(msg)
+				msg <- paste("Package:",pckg, "not found! This package is needed for this script to work.",'\n',"You need to install this package using ",paste("install.package('",pckg,"')",sep=""))
+				cat(msg)
+				fail = TRUE
 			} 
 		}
 	}
+
+	if (fail) stop("Some required packages are missing!")
 }
 
 #######
