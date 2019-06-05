@@ -7,9 +7,19 @@
 #SBATCH --mail-user=YOURemailHERE
 #SBATCH --mail-type=ALL
 
+# define some environment variables to generaliz the script
+# RACS location
+RACS=PATHtoRACS
+# INPUT and IP files location
+DATA=PAHTtoDATA
+# REFerence files, eg. gff3 and fasta for T.T.
+REFS=PATHtoREFS
+
+# location of RAMDISK, typically /dev/shm or /tmp
+RAMDISK=/dev/shm
 
 # load needed modules // RACS repository located on $SCRATCH
-. $SCRATCH/RACS/hpc/modules
+. $RACS/hpc/modules
 
 echo $SLURM_SUBMIT_DIR
 cd $SLURM_SUBMIT_DIR
@@ -21,9 +31,9 @@ date
 # data subdirectory containing data files: INPUT and IP files
 # refs subdirectory containing reference files: fasta and gff3 files
 # the pipeline will attempt to use RAMDisk (/dev/shm) and autodetect maximum number of cores to use
-($SCRATCH/RACS/core/countReads.sh        \
-        data/SSCH1-1_Input_S2_R1_001.fastq.gz  data/SSCH1-1_ChIP_S1_R1_001.fastq.gz       \
-        refs/T_thermophila_June2014_assembly.fasta  refs/T_thermophila_June2014.gff3  /dev/shm  \
+($RACS/core/countReads.sh        \
+        $DATA/SSCH1-1_Input_S2_R1_001.fastq.gz  $DATA/SSCH1-1_ChIP_S1_R1_001.fastq.gz       \
+        $REFS/T_thermophila_June2014_assembly.fasta  $REFS/T_thermophila_June2014.gff3  $RAMDISK  \
         >& output.log;	\
 echo $?;	\
 date) &
