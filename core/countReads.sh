@@ -75,10 +75,10 @@ SAMTOOLS=$(which samtools)
 
 ## target files
 ## TO BE READ as arguments... $1 (INPUT) and $2 (IP)
-[ -s $1 ] &&  INPUTfile=`basename $1` || errMsg "2nd argument should be a file with the INPUT reads (fastq.gz)"
-[ -s $2 ] &&  IPfile=`basename $2` || errMsg "3rd argument should be a file with the IP reads (fastq.gz)"
-[ -s $3 ] &&  FASTAfile=`basename $3` || errMsg "4th argument should be a file with the reference genome file (fasta)"
-[ -s $4 ] &&  REFfile=`basename $4` || errMsg "5th argument should be an annotation file (gff3)"
+[ -s $1 ] &&  INPUTfile=`basename $1` || errMsg "1st argument should be a file with the INPUT reads (fastq.gz)"
+[ -s $2 ] &&  IPfile=`basename $2` || errMsg "2nd argument should be a file with the IP reads (fastq.gz)"
+[ -s $3 ] &&  FASTAfile=`basename $3` || errMsg "3rd argument should be a file with the reference genome file (fasta)"
+[ -s $4 ] &&  REFfile=`basename $4` || errMsg "4th argument should be an annotation file (gff3)"
 
 faiFILE=$FASTAfile
 fastaFILE=$FASTAfile
