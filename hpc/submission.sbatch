@@ -7,7 +7,7 @@
 #SBATCH --mail-user=YOURemailHERE
 #SBATCH --mail-type=ALL
 
-# define some environment variables to generaliz the script
+# define some environment variables to generalize the submission script
 # RACS location
 RACS=PATHtoRACS
 # INPUT and IP files location

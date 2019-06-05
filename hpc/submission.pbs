@@ -6,6 +6,19 @@
  
 # load modules, ie. to use, eg. SamTools and BWA 
 module load samtools/1.3.1 bwakit
+
+
+# define some environment variables to generalize the submission script
+# RACS location
+RACS=PATHtoRACS
+# INPUT and IP files location
+DATA=PAHTtoDATA
+# REFerence files, eg. gff3 and fasta for T.T.
+REFS=PATHtoREFS
+
+# location of RAMDISK, typically /dev/shm or /tmp
+RAMDISK=/dev/shm
+
  
 # DIRECTORY TO RUN - $PBS_O_WORKDIR is directory job was submitted from
 cd $PBS_O_WORKDIR
@@ -15,9 +28,9 @@ cd $PBS_O_WORKDIR
 # data subdirectory containing data files: INPUT and IP files
 # refs subdirectory containing reference files: fasta and gff3 files
 # the pipeline will attempt to use RAMDisk (/dev/shm) and autodetect maximum number of cores to use
-($SCRATCH/RACS/core/countReads.sh        \
-        data/SSCH1-1_Input_S2_R1_001.fastq.gz  data/SSCH1-1_ChIP_S1_R1_001.fastq.gz       \
-        refs/T_thermophila_June2014_assembly.fasta  refs/T_thermophila_June2014.gff3  /dev/shm  \
+($RACS/core/countReads.sh        \
+        $DATA/SSCH1-1_Input_S2_R1_001.fastq.gz  $DATA/SSCH1-1_ChIP_S1_R1_001.fastq.gz       \
+        $REFS/T_thermophila_June2014_assembly.fasta  $REFS/T_thermophila_June2014.gff3  $RAMDISK  \
         >& output.log) &
 
 wait
