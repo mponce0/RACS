@@ -7,16 +7,9 @@
 #SBATCH --mail-user=YOURemailHERE
 #SBATCH --mail-type=ALL
 
-# define some environment variables to generalize the submission script
-# RACS location
-RACS=PATHtoRACS
-# INPUT and IP files location
-DATA=PAHTtoDATA
-# REFerence files, eg. gff3 and fasta for T.T.
-REFS=PATHtoREFS
-
-# location of RAMDISK, typically /dev/shm or /tmp
-RAMDISK=/dev/shm
+# load definitions from some environment variables to generalize the submission script,
+# such as:  RACS location, datafiles location, RAMdisk, ...
+. setup.env
 
 # load needed modules // RACS repository located on $SCRATCH
 . $RACS/hpc/modules
