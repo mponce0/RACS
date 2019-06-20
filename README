@@ -3,6 +3,9 @@ RACS: Rapid Analysis of ChIP-Seq data for contig based genomes
 These tools are a serie of scripts developed to facilitate the analysis
 of ChIP-Seq data and has been applied to the organism T. Thermophila.
 
+
+* Requirements
+
 The scripts should work in any Linux-type OS (ie. Mac OS and Linux OS).
 It requires to have installed the following programs:
 	- SAMtools
@@ -11,6 +14,7 @@ It requires to have installed the following programs:
 
 The first two are needed for the determination of reads in open region frames -ORF- (genic regions).
 While SAMtools and R are needed for the determination of intergenic regions -IGR-.
+
 
 The main scripts are located in the "core" directory.
 Additionally we provide other subdirectories containing the following:
