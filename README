@@ -380,3 +380,18 @@ IV) normalization and cut-off without a negative control
 
 V) comparison to MACS and Other Tools 
 	--- in prep. ---
+
+
+
+
+* CITATIONS
+This pipeline is open source under the MIT license, and researchers are welcome to use it.
+We will appreciate if users can let us know if they found bugs or could provide feedback about its use and experience using RACS.
+Please cite our paper (CITE_RACS) when ever you are using RACS.
+
+
+Publications where RACS has been used:
+- "The Med31 conserved component of the divergent Mediator complex in Tetrahymena thermophila participates in developmental regulation", Garg et al., Current Biology in press.
+
+- "The bromodomain-containing protein Ibd1 links multiple chromatin-related protein complexes to highly expressed genes in Tetrahymena thermophila", Saettone et al, Epigenetics & Chromatin (2018).
+
