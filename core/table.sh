@@ -8,11 +8,23 @@ FILE=$1
 # filterS can be modified/added depending on the "TARGET" organism and 'protein'
 filter1=gene
 filter2="Name=TTHERM_"
-#filter3='"hypothetical protein"'
+# and one could keep addingg further 'filters' if needed...
+# filter3='"hypothetical protein"'
+# ...
 
-TARGET=$(grep $filter1 $FILE | grep $filter2)
+# Eg. 
+# TARGET=$(grep $filter1 $FILE | grep $filter2)
+#
+# grep $filter1 $FILE | grep $filter2 | awk '{print $1":"$4"-"$5"  "$9}
 
-#grep $filter1 $FILE | grep $filter2 | awk '{print $1":"$4"-"$5"  "$9}
+
+# define some delimiters...
+delim1="TTHERM"
+delim2=";Note"
+delim3="Note="
+
+
+################## selection ... #####################################
 
 # grab scafold and genes' range
 grep $filter1 $FILE | grep $filter2 | awk '{print $1" "$4"-"$5}' > tmp0
@@ -23,7 +35,11 @@ grep $filter1 $FILE | grep $filter2 | awk 'BEGIN{FS="Note="} {print "Note="$2}' 
 # compute gene size
 grep $filter1 $FILE | grep $filter2 | awk '{print $5-$4+1}' > tmp3
 
-# put all together to generate table
+#######################################################################
+
+# join sliced data (tmp.files) to generate a combined table
 paste tmp0 tmp1 tmp2 tmp3 | sort  -k 1 | sort -t: -n -k 2  | awk '{print $1":"$2"\t"$3"\t"$4"\t"$5"\t"$6}' > table.$FILE
+
+# cleanup: remove temporary files...
 rm tmp0 tmp1 tmp2 tmp3
 
