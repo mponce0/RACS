@@ -6,3 +6,5 @@ intergenic/interGeneRegions.R
 intergenic/det-interGenes.sh
 auxs/testFns.sh
 auxs/auxFns.sh
+auxs/TT_gene.id
+auxs/TT_mRNA.id
