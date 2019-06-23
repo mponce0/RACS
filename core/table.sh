@@ -1,51 +1,60 @@
 # table.sh file, part of RACS ORF pipeline
-# this script is internal to the RACS ORF pipeline, and it is called from countReads.sh
-
-# command-line arguments
-FILE=$1
-# eg. FILE=T_thermophila_June2014.gff3
-
-
-#####################################################################
-#####################################################################
-## The following two sections:
-##
-##		"FILTERS AND DELIMITERS"
-##
-##	and
-##
-##		"SELECTIONS"
-##
-## should be determine depending on the particular organism, protein,
-## genes (ie. target) and data layout of the specific file to be
-## processed.
-##
-## Here we present the case for Tetrahymena Thermophila.
-#####################################################################
-#####################################################################
-
-
-############  CASE FOR TETRAHYMENA THERMOPHILA  #####################
-################# FILTERS AND DELIMITERS ############################
-# filterS can be modified/added depending on the "TARGET" organism and 'protein'
-filter1="gene"
-filter2="Name=TTHERM_"
-# and one could keep addingg further 'filters' if needed...
-# filter3='"hypothetical protein"'
-# ...
-
-# Eg. 
-# TARGET=$(grep $filter1 $FILE | grep $filter2)
 #
-# grep $filter1 $FILE | grep $filter2 | awk '{print $1":"$4"-"$5"  "$9}
+# This script is internal to the RACS ORF pipeline, and it is called from
+# "countReads.sh"
+# However this script can be used separatedly for generating
+# tables of ORF for a given organism and targets
+#
+# The script accepts two arguments:
+#
+#  1st) a mandatory argument specifying the name of the reference file (gff3)
+#
+#  2nd) an optional argument indicating the configuration file of the target
+#  terms to identify within the reference file.
+#  If the second argument is not indicated, the script will assume the
+#  definitions for the Tetrahymena Thermophila provided by our pipeline
+#  included in the "TT_gene.id" file
+#
+#####################################################################
 
 
-# define some delimiters...
-delim1="TTHERM"
-delim2=";Note"
-delim3="Note="
+. ../auxs/auxFns.sh
 
-######################################################################
+#### CHECKS ###########################################
+### CHECK arguments
+if [[ $# -eq 0 ]]; then
+        errMsg "No arguments supplied!";
+fi
+#
+if [[ $# -lt 1 ]]; then
+        errMsg "At least one mandatory argument is  needed!";
+fi
+######################################################
+# Process command-line arguments
+# 1st argument - MANDATORY: name of the reference file to process...
+# eg. FILE=T_thermophila_June2014.gff3
+FILE=$1
+echo "Verifying $FILE..."
+checkFile $FILE
+
+# 2nd argumetn - OPTIONAL: if a second argument is specified,
+# it should contain the definition of the filters and targets for the
+# ORGANISM; otherwise if there is no 2nd argument, the script will
+# assume the definitions for the Tetrahymena Thermophila provided
+# by our pipeline in the "TT_gene.id" file
+if [ " "$2 != " " ]; then ORGANISM=$2 ; else ORGANISM="auxs/TT_gene.id"; fi
+
+echo "checking for organism defns in $ORGANISM"
+checkFile $ORGANISM
+######################################################
+
+
+#####################################################################
+#####################################################################
+# load details of the organism, i.e. filters, targets, etc.
+. $ORGANISM
+#####################################################################
+#####################################################################
 
 
 
