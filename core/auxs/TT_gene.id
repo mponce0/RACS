@@ -1,0 +1,41 @@
+#####################################################################
+#####################################################################
+## The following two sections:
+##
+##		"FILTERS AND DELIMITERS"
+##
+##	and
+##
+##		"SELECTIONS"
+##
+## should be determine depending on the particular organism, protein,
+## genes (ie. target) and data layout of the specific file to be
+## processed.
+##
+## Here we present the case for Tetrahymena Thermophila.
+#####################################################################
+#####################################################################
+
+
+############  CASE FOR TETRAHYMENA THERMOPHILA  #####################
+################# FILTERS AND DELIMITERS ############################
+# filterS can be modified/added depending on the "TARGET" organism and 'protein'
+filter1="gene"
+filter2="Name=TTHERM_"
+# and one could keep addingg further 'filters' if needed...
+# filter3='"hypothetical protein"'
+# ...
+
+# Eg. 
+# TARGET=$(grep $filter1 $FILE | grep $filter2)
+#
+# grep $filter1 $FILE | grep $filter2 | awk '{print $1":"$4"-"$5"  "$9}
+
+
+# define some delimiters...
+delim1="TTHERM"
+delim2=";Note"
+delim3="Note="
+
+######################################################################
+#######################################################################
