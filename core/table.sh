@@ -52,7 +52,7 @@ echo "Verifying $FILE..."
 checkFile $FILE
 FILEname=`basename $FILE`
 
-# 2nd argumetn - OPTIONAL: if a second argument is specified,
+# 2nd argument - OPTIONAL: if a second argument is specified,
 # it should contain the definition of the filters and targets for the
 # ORGANISM; otherwise if there is no 2nd argument, the script will
 # assume the definitions for the Tetrahymena Thermophila provided
