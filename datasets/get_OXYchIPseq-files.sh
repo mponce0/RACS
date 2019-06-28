@@ -36,11 +36,14 @@ checkTools fastq-dump gzip
 srxFiles="SRX483016 SRX483017"
 
 # download fastq files
+echo "starting to download files using fastq-dump..."
 for i in $srxFiles; do
+	echo "accessing $i file ... ";
 	fastq-dump -I --split-files $i
 done
 
 # generate fastq.gz files
+echo "Compressing files..."
 for i in *fastq; do
 	echo $i ;
 	gzip -c $i > $i.gz ;
