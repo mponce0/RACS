@@ -1,13 +1,14 @@
 #!/bin/bash
 
-# Tool for download Oxytrichia data from NCBI_SRA
+# Tool for downloading "Oxytrichia" data from NCBI_SRA
 # This script is part of
 # RACS v1.0 (2018/2019) -- Open source tools for Analizing ChIP-Seq data                                   
 
 # It requires the "NCBI SRA (Sequence Read Archive)" to download the data
 # whcioh can be obtained from	https://github.com/ncbi/sra-tools
 
-# set PATH to add "SRA toolkit"
+# if it is not part of your PATH, you can use this to add the location
+# where "SRA toolkit" is installed so it can be used to download the NCBI data
 PATH=$PATH:/scratch1/mponce/RESEARCH/Tetrahymena_Ryerson/TOOLS/NCBI_SRA_toolkit/sratoolkit.2.9.6-1-ubuntu64/bin
 
 #######################################################
@@ -48,4 +49,5 @@ for i in *fastq; do
 	echo $i ;
 	gzip -c $i > $i.gz ;
 done
+
 
