@@ -147,7 +147,7 @@ tock(){
 # helper fns for handling error messages
 pausee() { echo "----------------------------------------"; read -p "$*"; }
 msg() { echo "$0: $*" >&2; }
-errMsg() { msg "$*"; pausee 'Press [Enter] to continue...'; usage;  exit 111;}
+errMsg() { msg "$*"; pausee 'Press [Enter] to continue...'; usage;  return 1 2>/dev/null; exit 1;}
 try() { "$@" || errMsg "cannot $*"; }
 #######################################################
 
