@@ -374,8 +374,13 @@ See,
 	datasets/PostProcessing_Intergenic.xlsx
 
 
-IV) normalization and cut-off without a negative control
+III') normalization and cut-off without a negative control
 	--- in prep. ---
+
+
+IV) Proccessing different organsims than Tetrahymena Thermophila
+
+IV.i)
 
 
 V) comparison to MACS and Other Tools 
@@ -389,9 +394,12 @@ V) comparison to MACS and Other Tools
 This pipeline is open source under the MIT license, and researchers are welcome
 to use it.
 We will appreciate if users can let us know if they found bugs or could provide
-feedback about its use and experience using RACS.  Please cite our paper
-(CITE_RACS) when ever you are using RACS.
+feedback about its use and experience using RACS.
+Please cite our paper (CITE_RACS) when ever you are using RACS.
 
+Main paper to cite about RACS:
+- "RACS: Rapid Analysis of ChIP-Seq data for contig based genomes",
+  Ponce et al., BMC in press.
 
 Publications where RACS has been used:
 - "The Med31 conserved component of the divergent Mediator complex in
