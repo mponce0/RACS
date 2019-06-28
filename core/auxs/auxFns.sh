@@ -62,7 +62,7 @@ checkTools(){
 	for tool in "$@"; do
 		# look for the 'tool' in executable path
 		statusTOOL=$(which $tool);
-		# if exit-status is non-zero tool NOT found!
+		# if status is null => tool NOT found!
 		[ -z $statusTOOL ] && errMsg "$tool needs to be installed for using this pipeline!" || echo "	 $tool ... found!"
 	done
 }
