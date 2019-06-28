@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash 
 
 # auxiliary script to monitor RAMdisk and memory utilization
 #
@@ -6,6 +6,12 @@
 #	 RACS v1.0 (2018/2019) -- Open source tools for Analizing ChIP-Seq data         
 #
 ###########
+
+# instead of using the system fn, 'watch' (usually included in the OS for Linux)
+# we will  define our own, so it also works for MacOS
+mywatch() {
+	while clear; date ; eval $@ ; do sleep 2; done
+}
 
 
 # RAMdisk location
@@ -17,21 +23,24 @@ location="${ramdisk}/${USER}/${RACSdir}*"
 
 # Commands
 # check for files generated in the specified location
-cmd1="ls -l $location "
+cmd1=" ls -l $location "
 # check for memory utilization
 cmd2="free -g "
 # check for 
 cmd3="du -s -h $location "
 # separator for separating commands
-separator="echo -----------"
+separator="echo  -----------"
 # message
 msg="echo Press 'CTRL-C' to exit the monitoring tool..."
 
 # combine commmands
 obs="$cmd1 ; $separator ; $cmd2 ; $separator ; $cmd3 ; $separator ; $msg"
 
-# for testing purposes
-obs="echo '*-*'$obs'-*-' ; $obs"
+# a first argument equal to 'DBG' can be used for testing purposes
+if [ "${1}" == "DBG" ]
+then
+	obs="echo ';;;; running >>> ' ${obs}' <<< ;;;;' ; ${obs}"
+fi
 
 # observe...
-watch $test
+mywatch  $obs
