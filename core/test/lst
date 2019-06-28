@@ -4,7 +4,8 @@ comb_tables.sh
 intergenic/interGenes.sh
 intergenic/interGeneRegions.R
 intergenic/det-interGenes.sh
+intergenic/utils_RACS-IGR.R
 auxs/testFns.sh
 auxs/auxFns.sh
-auxs/TT_gene.id
-auxs/TT_mRNA.id
+defns/TT_gene.id
+defns/TT_mRNA.id
