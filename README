@@ -69,13 +69,16 @@ RACS
  |   |    ├── det-interGenes.sh
  |   |    ├── interGeneRegions.R
  |   |    └── interGenes.sh
+ |   └── defns
+ |   |   └── TT_gene.id
+ |   |   └── TT_mRNA.id
  |   └── test
  |        └── lst
  ├── datasets
  |   └── PostProcessing_Genic.xlsx
  |   └── PostProcessing_Intergenic.xlsx
  |   └── IBD1_ORF.xlsx
- |   └──IBD1_Intergenic.xlsx
+ |   └── IBD1_Intergenic.xlsx
  ├── hpc
  │   └── submission.pbs
  |   └── submission.slurm
@@ -400,6 +403,7 @@ Please cite our paper (CITE_RACS) when ever you are using RACS.
 Main paper to cite about RACS:
 - "RACS: Rapid Analysis of ChIP-Seq data for contig based genomes",
   Ponce et al., BMC in press.
+
 
 Publications where RACS has been used:
 - "The Med31 conserved component of the divergent Mediator complex in
