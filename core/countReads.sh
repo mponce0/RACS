@@ -15,10 +15,15 @@
 # 4th argument: annotiation file (.gff3)
 # 5th argument: working space (if possible use RAMdisk --ie. /dev/shm/--, or /tmp in a computer with SSD)
 # 6th argument (optional): number of cores to use for BWA multi-threading
+# 7th argument (optional): file with definitions for processing organisms other than the Tetrahymena Thermophila, or for looking at other keys/terms
+#
 #
 # Examples:
-# time PATHtoRACSrepo/core/countPeaks.sh   _1_MED1_INPUT_S25_L007_R1_001.fastq.gz  _3_MED1_IP_S27_L007_R1_001.fastq.gz  T_thermophila_June2014_assembly.fasta  T_thermophila_June2014.gff3  /tmp/  16
-# time PATHtoRACSrepo/core/countPeaks.sh   _1_MED1_INPUT_S25_L007_R1_001.fastq.gz  _3_MED1_IP_S27_L007_R1_001.fastq.gz  T_thermophila_June2014_assembly.fasta  T_thermophila_June2014.gff3  /dev/shm/  16
+# time PATHtoRACSrepo/core/countReads.sh   _1_MED1_INPUT_S25_L007_R1_001.fastq.gz  _3_MED1_IP_S27_L007_R1_001.fastq.gz  T_thermophila_June2014_assembly.fasta  T_thermophila_June2014.gff3  /tmp/  16
+# time PATHtoRACSrepo/core/countReads.sh   _1_MED1_INPUT_S25_L007_R1_001.fastq.gz  _3_MED1_IP_S27_L007_R1_001.fastq.gz  T_thermophila_June2014_assembly.fasta  T_thermophila_June2014.gff3  /dev/shm/  16
+# 
+#
+# More examples are available in the README file of the RACS repository
 # 
 #################################
 
