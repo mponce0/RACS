@@ -10,7 +10,9 @@
 # instead of using the system fn, 'watch' (usually included in the OS for Linux)
 # we will  define our own, so it also works for MacOS
 mywatch() {
-	while clear; date ; eval $@ ; do sleep 2; done
+	msg=" RACS Monitoring Tool \n -------------------- "
+	t='2'
+	while clear; echo -e $msg; echo -E "`date` -- updated every $t secs" ; eval $@ ; do sleep $t; done
 }
 
 
