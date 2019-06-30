@@ -19,7 +19,8 @@ While SAMtools and R are needed for the determination of intergenic regions -IGR
 The main scripts are located in the "core" directory.
 Additionally we provide other subdirectories containing the following:
 	- "hpc": submission scripts for typical job managers and schedulers in HPC environments
-	- "tools": comparison tools developed to compare against other software, eg. MACS
+	- "tools": comparison tools developed to compare against other software, eg. MACS;
+			also we included one monitoring tool to observe the memory/RAMdisk usage whiel RACS is running
 	- "datasets": examples of the data used to test and run our pipeline
 
 This pipeline is open source under the MIT license, and researchers are welcome to use it.
@@ -85,7 +86,7 @@ RACS
  |   └── IGR-jobs_parallel.gnu
  |   └── modules
  └── tools
-     └── 
+     └── racs_monitor.sh
      └── 
      └── 
 ''
