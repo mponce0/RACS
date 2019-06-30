@@ -21,7 +21,9 @@
 ######
 ######
 # setting preamble, detecting scripts location
-scriptsDIR=`dirname $0`
+scriptDIR=`dirname $0`
+# get absolute path...
+scriptsDIR=$( cd "${scriptDIR}" && pwd ) 
 
 # load auxiliary fns for integrity checks and message/error handling
 if [[ -f $scriptsDIR/auxs/auxFns.sh ]]; then
@@ -57,7 +59,7 @@ FILEname=`basename $FILE`
 # ORGANISM; otherwise if there is no 2nd argument, the script will
 # assume the definitions for the Tetrahymena Thermophila provided
 # by our pipeline in the "TT_gene.id" file
-if [ " "$2 != " " ]; then ORGANISM=$2 ; else ORGANISM="$scriptsDIR/auxs/TT_gene.id"; fi
+if [ " "$2 != " " ]; then ORGANISM=$2 ; else ORGANISM="$scriptsDIR/defns/TT_gene.id"; fi
 
 echo "checking for organism defns in $ORGANISM"
 checkFile $ORGANISM
