@@ -120,7 +120,6 @@ echo "BWA will use nbrCores="$NT", when possible"
 # save original directory
 myDIR=$(pwd)
 resultsDIR=$myDIR/ORF_RACS_results-`date '+%Y%m%d-%H%M%S'`	#`date +%D-%T`
-scriptsDIR=`dirname $0`
 
 ## -.-.-.-
 ORGANISM=${7:-"${scriptsDIR}/defns/TT_gene.id"}
