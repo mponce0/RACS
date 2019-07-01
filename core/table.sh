@@ -61,7 +61,7 @@ FILEname=`basename $FILE`
 # by our pipeline in the "TT_gene.id" file
 if [ " "$2 != " " ]; then ORGANISM=$2 ; else ORGANISM="$scriptsDIR/defns/TT_gene.id"; fi
 
-echo "checking for organism defns in $ORGANISM"
+echo "checking for target organism / defns / fitlers in  $ORGANISM"
 checkFile $ORGANISM
 ######################################################
 
