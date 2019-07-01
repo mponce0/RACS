@@ -4,6 +4,31 @@ These tools are a serie of scripts developed to facilitate the analysis
 of ChIP-Seq data and has been applied to the organism T. Thermophila.
 
 
+=== Content ===
+
+* Requirements
+
+* Installation
+  - Updating RACS
+  - Integrity checks
+
+* How to use the "RACS" pipeline
+  - Counting Reads in ORF
+    - Normalization of ORF by PF Cluster Scores
+  - Determination of InterGenic Regions
+
+* Additional Tools
+  - Monitoring RACS runs
+  - Downloading datasets
+  - Comparing RACS results to MACS
+
+* Examples
+
+* Citation & References
+
+================
+
+
 * Requirements
 
 The scripts should work in any Linux-type OS (ie. Mac OS and Linux OS).
@@ -382,9 +407,13 @@ III') normalization and cut-off without a negative control
 	--- in prep. ---
 
 
-IV) Proccessing different organsims than Tetrahymena Thermophila
+IV) Proccessing different organisms than Tetrahymena Thermophila
 
-IV.i)
+IV.i) Reference table manipulation
+
+IV.ii) ORF determination
+
+IV.iii) IGR determination
 
 
 V) comparison to MACS and Other Tools 
