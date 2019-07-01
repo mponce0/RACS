@@ -6,7 +6,7 @@
 # script containing a series of integrity checks: internal and external dependencies of the pipeline
 
 # determine where the scripts are located
-scriptsDIR=`dirname $0`
+scriptsDIR=$( cd "`dirname $0`" && pwd )	#`dirname $0`
 
 # load auxiliary fns
 . $scriptsDIR/auxFns.sh --source-only
@@ -15,6 +15,7 @@ scriptsDIR=`dirname $0`
 main() {
 	# integrity checks
 	echo "*** CHECKING RACS pipeline INTERNAL INTEGRITY..."
+	echo " identified RACS location... ${scriptsDIR} ..."
 	for i in `cat $scriptsDIR/../test/lst`; do
 		#echo $i;
 		checkIntegrityPipeline	../$i;
