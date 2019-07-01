@@ -318,8 +318,36 @@ Arguments to the script:
 
 
 
+* Additional Tools
 
-Examples:
+In addition to RACS main scripts, we have developed and provide some additional
+tools to help the user monitoring RACS runs, downloading publicallly available
+datasets that can be used to test and reproduce our results, and compare RACS 
+results vs other softwares.
+
+- Monitoring RACS runs
+  We provide a simple monitoring tool to observe the "working directory" space
+indicated in the ORF pipeline. In principle this can be done either in RAMdisk
+(ie. memory) or just a typical HDD. In particular when the user specifies to
+use memory instead, it could be useful to monitor the memroy utilization.
+This tool is available in the 'tools/racs_monitor.sh' script, when executed
+will list the specified working directory, space utilized within this and overall
+memory utilization.
+
+- Downloading datasets
+  We provide two scripts that will allow the user download the reference
+genomic files for Tetrahymena thermophilaT and Oxytrichia trifallax, as well as,
+the publicaclly available ChIP-seq data for the Oxytrichia trifallax.
+Both scripts are available in the 'datasets' directory:
+	get_GFF3-files.sh  will download the corresponding gff3 files for T.Thermophila and O.Trifallax.
+
+	get_OXYchIPseq-files.sh  will download two runs of ChIP-next gen. seq. data for Oxytrichia trifallax. Because this data is located at NCBI repositories the user should hav installed the SRA toolkit tools in order to access and download this data.
+
+- Comparison tools
+
+
+
+* EXAMPLES
 I) calling peaks for ORF
 I.i) the following command will run the countReads.sh script using:
 	- 'data2/_1_MED1_INPUT_S25_L007_R1_001.fasta.gz'  as the file with the INPUT reads
