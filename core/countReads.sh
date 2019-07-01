@@ -39,7 +39,7 @@ fi
 scriptDIR=`dirname $0`
 # get the absolute path of RACS...
 scriptsDIR=$( cd "${scriptDIR}" && pwd )
-echo "RACS location... ${scriptsDIR}"
+echo "RACS location --> ${scriptsDIR}"
 
 # load auxiliary fns for integrity checks and message/error handling
 if [[ -f $scriptsDIR/auxs/auxFns.sh ]]; then
@@ -123,7 +123,7 @@ resultsDIR=$myDIR/ORF_RACS_results-`date '+%Y%m%d-%H%M%S'`	#`date +%D-%T`
 
 ## -.-.-.-
 ORGANISM=${7:-"${scriptsDIR}/defns/TT_gene.id"}
-echo "###>>> '${ORGANISM}' to process..."
+echo "==>>> organism specified by  '${ORGANISM}'  to process..."
 checkFile $ORGANISM
 ORGfile=`basename $ORGANISM`
 ## -.-.-.-
