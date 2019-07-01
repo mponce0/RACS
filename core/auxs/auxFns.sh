@@ -32,7 +32,7 @@ welcome() {
 ##
 
 helpMsg(){
-	scriptsDIR=`dirname $0`
+	scriptsDIR=$( cd "`dirname $0`" && pwd )	#`dirname $0`
 	welcome
 	echo $scriptsDIR
 	echo "How to use this script:"
@@ -43,7 +43,7 @@ helpMsg(){
 usage() {
 	shebang="#!/bin/bash"
 	scriptName=`basename $0`
-	scriptsDIR=`dirname $0`
+	scriptsDIR=$( cd "`dirname $0`" && pwd )	#`dirname $0`
 	welcome
 	echo "************************"
 	echo $scriptName
@@ -71,7 +71,7 @@ checkTools(){
 
 checkIntegrityPipeline(){
 	echo "Verifying RACS integrity..." 
-	scriptsDIR=`dirname $0`
+	scriptsDIR=$( cd "`dirname $0`" && pwd )	#`dirname $0`
 	for dep in "$@"; do
 		# this will make the fn look in the location from where the fn is being called, ie. relative to the location of the calling script...
 		testing=$scriptsDIR/$dep
