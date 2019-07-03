@@ -13,7 +13,7 @@
 #
 ##################################################
 # setting preamble, detecting scripts location
-scriptsDIR=`dirname $0`
+scriptsDIR=$( cd `dirname $0` && pwd )
 
 
 # load auxiliary fns for integrity checks and message/error handling
