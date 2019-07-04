@@ -27,6 +27,7 @@ welcome() {
 	echo "RACS v1.0 (2018/2019) -- Open source tools for Analizing ChIP-Seq data"
 	echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 
+	echo "RACS location ---> $scriptsDIR"
 }
 
 ##
