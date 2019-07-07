@@ -438,8 +438,26 @@ III') normalization and cut-off without a negative control
 IV) Proccessing different organisms than Tetrahymena Thermophila
 
 IV.i) Reference table manipulation
+	During the analysis and determination of ORF, the reference file for
+the given organsim is processed by selecting the appropiate terms and filters
+to carve the corresponding terms.
+In the subdirectory "core/defns", we present examples of what terms and
+filters have to be specified; eg.
+	TT_gene.id  _ for selecting "genes" from Tetrahymena Thermophila
+	TT_mRNA.id  _ for selecting "mRNA" from Tetrahymena Thermophila
+	OXY_gene.id  _ for selecting "genes" from the Oxytricha Trifallax
+
+For instance, the following command will select the micro-RNA for the Tetrahymena Thermophila,
+
+	PATHtoRACS/core/table.sh  T_thermophila_June2014.gff3  PATHtoRACS/core/defns/TT_mRNA.id
+
+or, the "genes" for the Oxytricha Trifallax,
+
+	PATHtpRACS/core/table.sh  Oxytricha_trifallax_022112.gff3  PATHtoRACS/core/defns/OXY_gene.sh
+
 
 IV.ii) ORF determination
+
 
 IV.iii) IGR determination
 
