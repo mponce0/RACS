@@ -435,7 +435,7 @@ III') normalization and cut-off without a negative control
 	--- in prep. ---
 
 
-IV) Proccessing different organisms than Tetrahymena Thermophila
+IV) Proccessing generic organisms/terms, other than Tetrahymena Thermophila
 
 IV.i) Reference table manipulation
 	During the analysis and determination of ORF, the reference file for
@@ -449,14 +449,25 @@ filters have to be specified; eg.
 
 For instance, the following command will select the micro-RNA for the Tetrahymena Thermophila,
 
-	PATHtoRACS/core/table.sh  T_thermophila_June2014.gff3  PATHtoRACS/core/defns/TT_mRNA.id
+	PATHtoRACSrepo/core/table.sh  T_thermophila_June2014.gff3  PATHtoRACS/core/defns/TT_mRNA.id
 
 or, the "genes" for the Oxytricha Trifallax,
 
-	PATHtpRACS/core/table.sh  Oxytricha_trifallax_022112.gff3  PATHtoRACS/core/defns/OXY_gene.sh
+	PATHtoRACSrepo/core/table.sh  Oxytricha_trifallax_022112.gff3  PATHtoRACS/core/defns/OXY_gene.id
 
 
 IV.ii) ORF determination
+	For analizing generic organisms and terms, we need to propagate the infromation
+passed to the "table.sh" script as explaied in the previous edamples for the analysis of
+ORFs,
+
+	PATHtoRACSrepo/core/countReads.sh   data2/_1_MED1_INPUT_S25_L007_R1_001.fastq.gz  data2/_3_MED1_IP_S27_L007_R1_001.fastq.gz  T_thermophila_June2014_assembly.fasta  T_thermophila_June2014.gff3  /dev/shm/  16  PATHtoRACS/core/defns/TT_mRNA.id
+
+        PATHtoRACSrepo/core/countReads.sh  SRX483016_1.fastq.gz  SRX483017_1.fastq.gz  Oxytricha_trifallax_022112_assembly.fasta  Oxytricha_trifallax_022112.gff3  /dev/shm/  16  PATHtoRACS/core/defns/OXY_gene.idf
+
+where "SRX483017_1.fastq.gz" corresponds to the data for run #1 ChIP-Seq, and
+"SRX483016_1.fast1.gz" corresponds to the data for the Input of the
+Oxytricha trifallax ChIP-Seq run #1.
 
 
 IV.iii) IGR determination
