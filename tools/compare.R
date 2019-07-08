@@ -196,19 +196,19 @@ comparison <- function(sample1,sample2, DBG=TRUE) {
 
     if (dsset1 == 0) {
 	if (DBG) {
-	# not data registered for this scaffold in sample1
-	cat("not data registered for this scaffold:",scfld," in sample1",'\n')
-	print(sset1)
-	print(sset2)
+		# not data registered for this scaffold in sample1
+		cat("not data registered for this scaffold:",scfld," in sample1",'\n')
+		print(sset1)
+		print(sset2)
         }
 	tmpreg <-  c(as.character(scfld),"--","--", sset2$start,sset2$end, as.numeric(-1))
 	if (DBG) print(tmpreg)
         results <- rbind(results, as.character(tmpreg))
     } else if (dsset2 == 0 ) {
         if (DBG) {
-	cat("not data registered for this scaffold:",scfld," in sample2",'\n')
-        print(sset1)
-        print(sset2)
+		cat("not data registered for this scaffold:",scfld," in sample2",'\n')
+	        print(sset1)
+        	print(sset2)
         }
         tmpreg <-  c(as.character(scfld),"--","--", sset1$start,sset1$end, as.numeric(+1))
         if (DBG) print(tmpreg)
