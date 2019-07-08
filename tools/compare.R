@@ -16,15 +16,13 @@
 #	source("PATHtoRACSrepo/tools/compare.R")
 #
 #    now, several functions should be available for you to use, including some
-#    tests cases...
+#    tests cases as well.
 #
+#   Please refer to the "Cxamples" section in the README file fore more
+#   details!
 #
 ########################################################################
-#
-#
-# Function to establish the location of the script... hence the relative path to the utilities file
-# this function needs to be in the main driver script!
-#
+
 
 
 #########################################################################
