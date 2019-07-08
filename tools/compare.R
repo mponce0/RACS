@@ -16,7 +16,7 @@
 #	source("PATHtoRACSrepo/tools/compare.R")
 #
 #    now, several functions should be available for you to use, including some
-#    tests cases; eg.
+#    tests cases...
 #
 #
 ########################################################################
