@@ -1,6 +1,6 @@
 RACS: Rapid Analysis of ChIP-Seq data for contig based genomes
 
-These tools are a serie of scripts developed to facilitate the analysis
+These tools are a series of scripts developed to facilitate the analysis
 of ChIP-Seq data and has been applied to the organism T. thermophila.
 
 
@@ -45,7 +45,7 @@ The main scripts are located in the "core" directory.
 Additionally we provide other subdirectories containing the following:
 	- "hpc": submission scripts for typical job managers and schedulers in HPC environments
 	- "tools": comparison tools developed to compare against other software, eg. MACS;
-			also we included one monitoring tool to observe the memory/RAMdisk usage whiel RACS is running
+			also we included one monitoring tool to observe the memory/RAMdisk usage while RACS is running
 	- "datasets": examples of the data used to test and run our pipeline
 
 This pipeline is open source under the MIT license, and researchers are welcome to use it.
@@ -66,8 +66,8 @@ or
 
 	https://bitbucket.org/mjponce/racs
 
-Both repositories are synchronized, so that the latest version of RACS will be avaialble in both
-repositiories simultaneously.
+Both repositories are synchronized, so that the latest version of RACS will be available in both
+repositories simultaneously.
 
 To obtain and install a copy of RACS in your computer, open a terminal (you will need git and
 a internet connection!) and type:
@@ -98,6 +98,7 @@ RACS
  |   └── defns
  |   |   └── TT_gene.id
  |   |   └── TT_mRNA.id
+ |   |   +-- OXY_gene.id
  |   └── test
  |        └── lst
  ├── datasets
@@ -112,8 +113,8 @@ RACS
  |   └── modules
  └── tools
      └── racs_monitor.sh
-     └── 
-     └── 
+     └── setup.R 
+     └── compare.R
 ''
 
 
@@ -227,7 +228,7 @@ Similarly, by checking the location of the script, the pipeline verifies that th
 other components of the pipeline are also in place and can be found so that the pipeline
 can run without any problems.
 In this way, there is no need to add the different scripts of the pipeline to the
-PATH and the scripts are selfaware of where they are placed.
+PATH and the scripts are self-aware of where they are placed.
 For achieving this, the scripts will need to be called specifying its full location in the computer.
 
 The different scripts in the pipeline will also check that the arguments specified,
@@ -280,9 +281,9 @@ This script is called "normalizedORF.sh" and is located in the core subdirectory
 The script requires three mandatory arguments:
 	1st argument: "FINAL.table.*"  file generated from the RACS' ORF pipeline
 	2nd argument: "PF-INPUT-value"  PF value correspoding to the INPUT file
-	3rd argument: "PF-IP-value"  PF value correspoding to the IP file
+	3rd argument: "PF-IP-value"  PF value corresponding to the IP file
 
-Please notice that arguments 2 and 3, are the acutal numerical values corresponding to the PF clusters
+Please notice that arguments 2 and 3, are the actual numerical values corresponding to the PF clusters
 for the INPUT and IP respectively.
 
 
@@ -321,7 +322,7 @@ Arguments to the script:
 * Additional Tools
 
 In addition to RACS main scripts, we have developed and provide some additional
-tools to help the user monitoring RACS runs, downloading publicallly available
+tools to help the user monitoring RACS runs, downloading publicly available
 datasets that can be used to test and reproduce our results, and compare RACS 
 results vs other softwares.
 
@@ -329,19 +330,19 @@ results vs other softwares.
   We provide a simple monitoring tool to observe the "working directory" space
 indicated in the ORF pipeline. In principle this can be done either in RAMdisk
 (ie. memory) or just a typical HDD. In particular when the user specifies to
-use memory instead, it could be useful to monitor the memroy utilization.
+use memory instead, it could be useful to monitor the memory utilization.
 This tool is available in the 'tools/racs_monitor.sh' script, when executed
 will list the specified working directory, space utilized within this and overall
 memory utilization.
 
 - Downloading datasets
   We provide two scripts that will allow the user download the reference
-genomic files for Tetrahymena thermophilaT and Oxytrichia trifallax, as well as,
-the publicaclly available ChIP-seq data for the Oxytrichia trifallax.
+genomic files for Tetrahymena thermophila and Oxytrichia trifallax, as well as,
+the publicly available ChIP-seq data for the Oxytrichia trifallax.
 Both scripts are available in the 'datasets' directory:
 	get_GFF3-files.sh  will download the corresponding gff3 files for T.thermophila and O.trifallax.
 
-	get_OXYchIPseq-files.sh  will download two runs of ChIP-next gen. seq. data for Oxytrichia trifallax. Because this data is located at NCBI repositories the user should hav installed the SRA toolkit tools in order to access and download this data.
+	get_OXYchIPseq-files.sh  will download two runs of ChIP-next gen. seq. data for Oxytrichia trifallax. Because this data is located at NCBI repositories the user should have installed the SRA toolkit tools in order to access and download this data.
 
 - Comparison tools
 
