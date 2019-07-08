@@ -21,7 +21,7 @@ NeededPackages <- function(pckges, otherPckgs="", def.mirror='https://cloud.r-pr
 
 	# deal with packages from CRAN
         needTOinstall <- !(pckges %in% availablePckges)
-	if (sum(needTOinstall) == 0) {
+	if (sum(needTOinstall) != 0) {
 	    cat("Requested packages:")
 	    print(pckges)
 	    cat("installing...", pckges[needTOinstall], '\n')
@@ -32,7 +32,7 @@ NeededPackages <- function(pckges, otherPckgs="", def.mirror='https://cloud.r-pr
 
 	# deal with packages from BioConductor
         needTOinstall <- !(otherPckgs %in% availablePckges)
-	if (sum(needTOinstall) == 0 ) {
+	if (sum(needTOinstall) != 0 ) {
 	    cat("Requested packages:")
 	    print(otherPckgs)
 	    cat("installing...", otherPckgs[needTOinstall], '\n')
