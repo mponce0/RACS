@@ -510,10 +510,39 @@ IV.iv) Full analysis of Oxytricha trifallax
 
 
 V) comparison to MACS and Other Tools 
-	--- in prep. ---
+	In order to compare RACS results vs MACS, we provide an R script that
+does that generating some visuals comparisons.
+	Please notice that this tool is still under development.
+	V.1) First start by checking that the necessary packages are installed,
+		PATHtoRACSrepo/tools/Rscript setup.R
+
+	V.2) Using the tool from an R session:
+	V.2-i) launch R
+
+	V.2-i) source the "compare.R" file
+
+		source("PATHtoRACSrepo/tools/compare.R")
 
 
+	V.2-ii) Now, you have a list of functions and datasets laoded ready to
+be used, including some tests cases:
 
+		ls()
+
+ [1] "comparison"     "comparison.ALL" "ibdX"           "load.data" 
+ [5] "loadCheckPkg"   "macsIBD1"       "macsIBD2"       "overlap" 
+ [9] "sample1"        "sample2"        "sampleIBD1"     "sampleIBD2" 
+[13] "tests"          "vizDiffs"
+
+For instance, 'sampleIBD1/sampleIBD2' are ORF generated with RACS, while
+'macsIBD1/macsIBD2' are the results obtained with MACS2.
+
+
+	V.2-iii) Now you could use the ibdX() function to compare each of them,
+eg.
+		ibdX(sampleIBD1,macsIBD1, "comparison_ibd1.pdf")
+
+	
 
 * CITATIONS
 
