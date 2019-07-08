@@ -545,6 +545,37 @@ eg.
 several static PDF plots would be generated, as well as, interavtive plots
 generated using the plotly library which would be stored in HTML files.
 
+	V.2-iv) Alternatively, one could inspect more in detail the results
+from RACS & MACS2; for instance, let's start by computing the overlapping
+scores between the results from both programs:
+
+        overlap.RACSvsMACS <- comparison(sampleIBD1,macsIBD1, DBG=FALSE)
+
+this will return a dataframe containing the scaffolds, coordinates for the 
+beggining and end determined by RACS and MACS2 respectively, and an overlap
+score; ie.
+        
+        scaffold        x1      x2      y1      y2      overlap
+
+The 'overlap score' is computed in the following way:
+        
+        +1,	when RACS detects a region and MACS2 does not
+        -1,	when MACS2 detects a region and RACS does not
+        ratio of region sizes,	when there is an overlap between the regions determined by RACS and MACS2
+
+Utilizing these overlap scores, then one could visualize this comparison using 
+the following function:
+
+        vizDiffs(overlap.RACSvsMACS)
+
+for generating a series of comparative static plots; or
+
+        vizDiffs(overlap.RACSvsMACS, iplots=TRUE)
+
+for generating additional interactive visualizations that will be saved in HTML
+documents that can be open in a web browser for interactive exploration.
+
+
 
 
 * CITATIONS
