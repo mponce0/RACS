@@ -542,7 +542,10 @@ For instance, 'sampleIBD1/sampleIBD2' are ORF generated with RACS, while
 eg.
 		ibdX(sampleIBD1,macsIBD1, "comparison_ibd1.pdf")
 
-	
+several static PDF plots would be generated, as well as, interavtive plots
+generated using the plotly library which would be stored in HTML files.
+
+
 
 * CITATIONS
 
