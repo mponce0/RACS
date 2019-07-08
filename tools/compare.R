@@ -3,13 +3,20 @@
 #
 # RACS utilities for comparison with MACS2 results
 #
-# requires "utils_RACS-compare.R" utilties file with fn defns
-#
-#
+#  *********************************************************************
+#  * * *  PLEASE NOTICE THAT THIS TOOL IS STILL UNDER DEVELOPMENT  * * *
+#  *********************************************************************
 #
 # HOW TO USE this script:
 #
-# Rscript interGeneRegions.R inputFile refFILE.gff3 outFile
+# 1) start by checking that the needed R packages are installed in your system:
+#	Rscript PATHtoRACSrepo/tools/setup.R
+#
+# 2) launch and R session and load the tool:
+#	source("PATHtoRACSrepo/tools/compare.R")
+#
+#    now, several functions should be available for you to use, including some
+#    tests cases; eg.
 #
 #
 ########################################################################
