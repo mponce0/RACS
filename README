@@ -1,4 +1,5 @@
 RACS: Rapid Analysis of ChIP-Seq data for contig based genomes
+====  --------------------------------------------------------
 
 These tools are a series of scripts developed to facilitate the analysis
 of ChIP-Seq data and has been applied to the organism T. thermophila.
@@ -160,6 +161,8 @@ at this point a series of checks will be executed and the results shown in the s
 If either one of the dependencies is not meet an error message describing the issue will be displayed,
 followed by the basic instructions in how to use RACS.
 
+
+-------------------------------------------------------------------------------
 
 
 * HOW TO USE THE 'racs' PIPELINE:
@@ -380,8 +383,11 @@ The main functionalities offered are:
 More concrete examples and uses are presented in the examples section below.
 
 
+-------------------------------------------------------------------------------
+
 
 * EXAMPLES
+
 I) calling peaks for ORF
 I.i) the following command will run the countReads.sh script using:
 	- 'data2/_1_MED1_INPUT_S25_L007_R1_001.fasta.gz'  as the file with the INPUT reads
@@ -617,6 +623,7 @@ for generating additional interactive visualizations that will be saved in HTML
 documents that can be open in a web browser for interactive exploration.
 
 
+-------------------------------------------------------------------------------
 
 
 * CITATIONS
@@ -644,3 +651,4 @@ Publications where RACS has been used:
   https://doi.org/10.1186/s13072-018-0180-6
 
 
+-------------------------------------------------------------------------------
