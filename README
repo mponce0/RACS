@@ -366,6 +366,18 @@ the user should have installed the SRA toolkit tools in order to access and
 download this data.
 
 - Comparison tools
+  We provide an R script which helps with the comparison among results obtained
+using RACS and MACS2.
+Please be aware that this tool is still under active development and for now
+is offered as set of functions degined to be used within R, either
+interactively or in batch mode by invoquing the functions defined in this
+module.
+The main functionalities offered are:
+	- calculation of the overlap between results coming from different
+		tools, eg. RACS vs MACS2, by defining an 'overlap score'
+		to quantify the similarities between the results.
+	- visual representations (statics and interactive) of the overlapping scores.
+More concrete examples and uses are presented in the examples section below.
 
 
 
