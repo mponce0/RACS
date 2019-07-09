@@ -218,15 +218,15 @@ located and find the different tools needed during the execution.
 Also, please do not "source" the scripts, they are set to be run as executable scripts,
 ie. execute the scripts in this way,
 
-	PATHtoRACSrepo/core/../scriptNAME.sh  args	# correct way to run RACS scripts
+	PATHtoRACSrepo/core/.../scriptNAME.sh  args	# correct way to run RACS scripts
 
 do *NOT* execute them in this way,
 
-	. PATHtoRACSrepo/core/../scriptNAME.sh  args	# WRONG: do *NOT* run RACS scripts in this way
+	. PATHtoRACSrepo/core/.../scriptNAME.sh  args	# WRONG: do *NOT* run RACS scripts in this way
 
 NOR in this way neither,
 
-	source PATHtoRACSrepo/core/../scriptNAME.sh  args	# WRONG: do *NOT* run RACS scripts in this way
+	source PATHtoRACSrepo/core/.../scriptNAME.sh  args	# WRONG: do *NOT* run RACS scripts in this way
 
 Our scripts will also try to detect this situation and prevent the user from doing this.
 Due to the modular implementation we designed for RACS, and in order to allow RACS
