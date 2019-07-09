@@ -191,10 +191,7 @@ visually inspecting some of them with IGV.
 
 In particular within this results' directory, there will be a file named
 "FINAL.table....", which is a plain text file presenting the results for the
-reads in the ORF in tabulated format with the following columns:
-
-	location  name  description  GeneSize  INPUT_reads  IP_reads
-
+reads in the ORF. Specific details about this file are presented below.
 This "FINAL.table...." file, which summarizes the results for the reads in the
 ORF, is one of the mandatory 'inputs' for the IGR scripts of the RACS pipeline.
 
@@ -268,7 +265,11 @@ Arguments to the script:
 	automatically the number of cores and use that number to run in multi-threading.
 	If you want to run the script serially, ie. with just one core, you should
 	set this argument to 1.
-
+	If you want the script to autmatically detect and use the cores, use ""
+	for this argument when you are aslo specifying the 7th argument.
+  7th argument (optional): used for specifying details, "defns", when
+	processing an arbitrary organism (other than Tetrahymena thermophila) and/or
+	targetting specifc filters/terms other than genes.
 
 The main output file, FINAL.table."INPUTfile"-"IPfile"
 (where "INPUTfile" and "IPfile" refer to the corresponding INPUT and IP files),
@@ -355,9 +356,14 @@ memory utilization.
 genomic files for Tetrahymena thermophila and Oxytricha trifallax, as well as,
 the publicly available ChIP-seq data for the Oxytricha trifallax.
 Both scripts are available in the 'datasets' directory:
-	get_GFF3-files.sh  will download the corresponding gff3 files for T.thermophila and O.trifallax.
 
-	get_OXYchIPseq-files.sh  will download two runs of ChIP-next gen. seq. data for Oxytricha trifallax. Because this data is located at NCBI repositories the user should have installed the SRA toolkit tools in order to access and download this data.
+	get_GFF3-files.sh  will download the corresponding gff3 files for
+T.thermophila and O.trifallax.
+
+	get_OXYchIPseq-files.sh  will download two runs of ChIP-next gen. seq.
+data for Oxytricha trifallax. Because this data is located at NCBI repositories
+the user should have installed the SRA toolkit tools in order to access and
+download this data.
 
 - Comparison tools
 
@@ -374,6 +380,9 @@ I.i) the following command will run the countReads.sh script using:
 
 	PATHtoRACSrepo/core/countReads.sh   data2/_1_MED1_INPUT_S25_L007_R1_001.fastq.gz  data2/_3_MED1_IP_S27_L007_R1_001.fastq.gz  T_thermophila_June2014_assembly.fasta  T_thermophila_June2014.gff3  /tmp/ 
 
+In this case, beucase we haven't specfied the number of cores to use, the
+script will try to automatically detect the number of cores in the computer and
+use all of them when running parallel parts of the pipeline.
 
 I.ii) the following command will run the countReads.sh script using the same
 arguments as before but it is specifying to use "/dev/shm" (RAMdisk) instead
