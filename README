@@ -502,7 +502,8 @@ where "SRX483017_1.fastq.gz" corresponds to the data for the ChIP-Seq
 run/experiment #1, and "SRX483016_1.fast1.gz" corresponds to the data for the
 Input of the Oxytricha trifallax ChIP-Seq run/experiment #1.
 
-The following example, is exactly the same as the previous one, but with the
+IV.ii') Automatic core detection with arbitrary organisms/terms defns.:
+	The following example, is exactly the same as the previous one, but with the
 solely difference that the script will try to automatically detect and use all
 the cores available in the computer; this is achieved by setting the 6th
 argument to "", which is needed when indicating the seventh argument:
