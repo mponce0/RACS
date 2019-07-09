@@ -608,7 +608,7 @@ The 'overlap score' is computed in the following way:
         
         +1,	when RACS detects a region and MACS2 does not
         -1,	when MACS2 detects a region and RACS does not
-        ratio of region sizes,	when there is an overlap between the regions determined by RACS and MACS2
+        ratio between region sizes,	when there is an overlap between the regions determined by RACS and MACS2
 
 Utilizing these overlap scores, then one could visualize this comparison using 
 the following function:
