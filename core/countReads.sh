@@ -19,8 +19,9 @@
 #
 #
 # Examples:
-# time PATHtoRACSrepo/core/countReads.sh   _1_MED1_INPUT_S25_L007_R1_001.fastq.gz  _3_MED1_IP_S27_L007_R1_001.fastq.gz  T_thermophila_June2014_assembly.fasta  T_thermophila_June2014.gff3  /tmp/  16
-# time PATHtoRACSrepo/core/countReads.sh   _1_MED1_INPUT_S25_L007_R1_001.fastq.gz  _3_MED1_IP_S27_L007_R1_001.fastq.gz  T_thermophila_June2014_assembly.fasta  T_thermophila_June2014.gff3  /dev/shm/  16
+#  PATHtoRACSrepo/core/countReads.sh   pathTOdata/_INPUT_file.fastq.gz  pathTOdata/_IP_file.fastq.gz  pathTOrefs/T_thermophila_June2014_assembly.fasta  pathTOrefs/T_thermophila_June2014.gff3  /tmp/  16
+#  PATHtoRACSrepo/core/countReads.sh   pathTOdata/_INPUT_file.fastq.gz  pathTOdata/_IP_file.fastq.gz  pathTOrefs/T_thermophila_June2014_assembly.fasta  pathTOrefs/T_thermophila_June2014.gff3  /dev/shm/  16
+#  PATHtoRACSrepo/core/countReads.sh   pathTOdata/_INPUT_file.fastq.gz  pathTOdata/_IP_file.fastq.gz  pathTOrefs/T_thermophila_June2014_assembly.fasta  pathTOrefs/T_thermophila_June2014.gff3  /dev/shm/  "" pathTOdefns/myDefns.id
 # 
 #
 # More examples are available in the README file of the RACS repository
@@ -31,6 +32,32 @@
 ### TIMERS... #################
 startTime=`date +%s`
 ###############################
+
+
+### STARTING LOG ##############                         
+logging() {
+        # set log file                                 
+        LOG_FILE=${myDIR}/"racs_${RunTimeDir}.log"
+        # open log file                                
+        touch ${LOG_FILE}                              
+        # capture std.output                           
+        #exec 1> ${LOG_FILE}                           
+	# capture std.error                            
+	#exec 2>&1                                     
+	# capture std. error and also mirror it to screen
+        exec 1> ${LOG_FILE} 2> >(tee -a ${LOG_FILE} >&2)
+	# other ways...
+        # >&3 | tee /dev/tty             
+        #{ { echo out; echo err 1>&2; } 2>&1 >&3 | tee /dev/tty; } >log 3>&1                                      
+        # exec 1>log 2> >(tee -a log >&2) 
+
+        ###                                            
+        welcome                                        
+        echo $0 $@                                     
+        date                                           
+}
+################################
+
 
 #######################################################
 # check that the script is not being sourced!!!
@@ -168,6 +195,7 @@ tableIPs=tableReadsIP.`basename $IPfile .fastq.gz`
 
 ####=====================================================
 
+logging
 
 ## pipeline
 # index the assembly
@@ -226,7 +254,7 @@ touch $tableINPUTs  #tableReadsINPUT
 ### [ ! -e $resultsDIR/$table ] || $scriptsDIR/table.sh $REFfile && cp -v $resultsDIR/$table .
 cmdTable="$scriptsDIR/table.sh $REFfile $ORGfile"
 ${cmdTable}
-[ $? -ne 0 ] && errMsg "' ${cmdTable} ' FAILED...! exitcode $?"
+#???#### [ $? -ne 0 ] && errMsg "' ${cmdTable} ' FAILED...! exitcode $?"
 
 for i in `awk '{print $1}' < $table `; do
     #echo $i;
