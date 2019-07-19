@@ -24,20 +24,31 @@ RACSdir="ORF_RACS-"
 # set location to inspect
 location="${ramdisk}/${USER}/${RACSdir}*"
 
-# Commands
+# check whether there is an instance of ORF in the 'location'...
+[ -d $location ] || warning_Msg="WARNING: workspace <<${location}>> not found! \n  If you are not using the standard (default) location, recall to specify it as an argument when executing this tool."
+
+
+### Commands ##
+## memory and space utilization ##
 # check for files generated in the specified location
-cmd1=" ls -l $location "
+[ -d $location ] && cmd1=" ls -l $location " || cmd1="echo -e '$warning_Msg' "
 # check for memory utilization
 cmd2="free -g "
 # check for 
-cmd3="du -s -h $location "
+[ -d $location ] && cmd3="du -s -h $location " || cmd3="echo -e '$warning_Msg' "
+##
+## Performance ##
+# check for processes
+cmd4="ps aux | grep RACS"
+##
 # separator for separating commands
 separator="echo  -----------"
 # message
 msg="echo Press 'CTRL-C' to exit the monitoring tool..."
+##
 
 # combine commmands
-obs="$cmd1 ; $separator ; $cmd2 ; $separator ; $cmd3 ; $separator ; $msg"
+obs="$cmd1 ; $separator ; $cmd2 ; $separator ; $cmd4; $separator ; $cmd3 ; $separator ; $msg"
 
 # a first argument equal to 'DBG' can be used for testing purposes
 for arg in "$@"; do
