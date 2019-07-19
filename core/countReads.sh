@@ -267,6 +267,6 @@ endTime=`date +%s`
 
 runtime=$((endTime-startTime))
 
-echo "Total runtime: $runtime"
+echo "Total runtime: $runtime secs"
 
 ################################
