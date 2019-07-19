@@ -28,6 +28,10 @@
 #################################
 
 
+### TIMERS... #################
+startTime=`date +%s`
+###############################
+
 #######################################################
 # check that the script is not being sourced!!!
 if [[ $0 == '-bash' ]]; then
@@ -255,4 +259,14 @@ $scriptsDIR/comb_tables.sh $INPUTfile $IPfile $REFfile
 cp -v FINAL.table.*  $resultsDIR
 
 # clean temp dir used
-rm -rfv $WORKINGdir 
+rm -rfv $WORKINGdir
+
+
+### TIMERS... #################
+endTime=`date +%s`
+
+runtime=$((endTime-startTime))
+
+echo "Total runtime: $runtime"
+
+################################
