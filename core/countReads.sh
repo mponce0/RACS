@@ -34,27 +34,37 @@ startTime=`date +%s`
 ###############################
 
 
-### STARTING LOG ##############                         
+### LOG function ############## 
 logging() {
-        # set log file                                 
+        # set log file 
         LOG_FILE=${myDIR}/"racs_${RunTimeDir}.log"
-        # open log file                                
-        touch ${LOG_FILE}                              
-        # capture std.output                           
-        #exec 1> ${LOG_FILE}                           
-	# capture std.error                            
-	#exec 2>&1                                     
-	# capture std. error and also mirror it to screen
-        exec 1> ${LOG_FILE} 2> >(tee -a ${LOG_FILE} >&2)
-	# other ways...
-        # >&3 | tee /dev/tty             
-        #{ { echo out; echo err 1>&2; } 2>&1 >&3 | tee /dev/tty; } >log 3>&1                                      
-        # exec 1>log 2> >(tee -a log >&2) 
+        # open log file 
+        touch ${LOG_FILE} 
 
-        ###                                            
-        welcome                                        
-        echo $0 $@                                     
-        date                                           
+	# CAPTURING standard output/error and still displaying in 'screen' (std.output)
+        # capture std.output 
+        #exec 1> ${LOG_FILE}
+	exec 1> >(tee -a ${LOG_FILE} >&1)
+	# capture std.error 
+	exec 2>&1
+	# capture std. error and also mirror it to screen
+        #exec 1> ${LOG_FILE} 2> >(tee -a ${LOG_FILE} >&1)
+	exec 2> >(tee -a ${LOG_FILE} >&1)
+	# other ways...
+        # >&3 | tee /dev/tty 
+        ###{ { echo out; echo err 1>&2; } 2>&1 >&3 | tee /dev/tty; } >${LOG_FILE} 3>&1 
+        #exec 1> ${LOG_FILE} 2> >(tee -a ${LOG_FILE} >&2) 
+
+	###
+	# display welcome line about RACS
+        welcome 
+	echo ""
+	# include original issued command passed as an argument to this fn
+        echo " cmd>>> " $@
+	echo ""
+	# print date
+        date
+	echo ".................." 
 }
 ################################
 
@@ -130,7 +140,7 @@ inputFILE2=IPfile
 #RAMdisk=/dev/shm/$USER/
 #RAMdisk=/tmp/$USER/
 RunTimeDir=ORF_RACS-$$-`date '+%Y%m%d-%H%M%S'`
-[ -d $5 ] && WORKINGdir=$5/$USER/$RunTimeDir || errMsg "6th argument must be a directory, we suggest using /dev/shm for RAMdisk or /tmp in a SSD device, as this pipeline is quite I/O intense!"
+[ -d $5 ] && WORKINGdir=$( cd "$5" && pwd )/$USER/$RunTimeDir || errMsg "6th argument must be a directory, we suggest using /dev/shm for RAMdisk or /tmp in a SSD device, as this pipeline is quite I/O intense!"
 echo "Working directory --> " $WORKINGdir
 
 
@@ -195,7 +205,8 @@ tableIPs=tableReadsIP.`basename $IPfile .fastq.gz`
 
 ####=====================================================
 
-logging
+# begin outputing to LOG file...
+logging $0$@
 
 ## pipeline
 # index the assembly
@@ -295,6 +306,8 @@ endTime=`date +%s`
 
 runtime=$((endTime-startTime))
 
+echo "-----------------------------"
 echo "Total runtime: $runtime secs"
+echo "-----------------------------"
 
 ################################
