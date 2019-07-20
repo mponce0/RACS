@@ -64,7 +64,7 @@ FILEname=`basename $FILE`
 # by our pipeline in the "TT_gene.id" file
 if [ " "$2 != " " ]; then ORGANISM=$2 ; else ORGANISM="$scriptsDIR/defns/TT_gene.id"; fi
 
-echo "checking for target organism / defns / fitlers in  $ORGANISM"
+echo "checking for target organism / defns / filters in  $ORGANISM"
 checkFile $ORGANISM
 ######################################################
 
@@ -73,6 +73,7 @@ checkFile $ORGANISM
 #####################################################################
 # load details of the organism, i.e. filters, targets, etc.
 . $ORGANISM
+echo -e "\t loaded defns...  <<${filter1}>> :: <<${filter2}>> :: <<${delim1}>> :: <<${delim2}>> :: <<${delim3}>>"
 #####################################################################
 #####################################################################
 
@@ -81,18 +82,50 @@ checkFile $ORGANISM
 ################## selection ... #####################################
 
 # grab scafold and genes' range
-grep $filter1 $FILE | grep $filter2 | awk '{print $1" "$4"-"$5}' > tmp0.$FILEname
+# a-la-grep: problem not working if there is more than one apperance in the line
+[ $DBG == "on" ] && grep $filter1 $FILE | grep $filter2 | awk '{print $1" "$4"-"$5}' > tmp0.$FILEname.grep
+# a-la-awk: allows for specifying in which column to specifcally look for... 
+matching_column=3
+grep $filter1 $FILE | grep $filter2 |	\
+	awk	-v matching_col=${matching_column}	\
+		-v target="$filter1"			\
+		'$matching_col ~ target	 {print $1" "$4"-"$5}'  >  tmp0.$FILEname
 
 # grab "TTHERM", ie. *delim1*
 # grep $filter1 $FILE | grep $filter2 | awk 'BEGIN{FS="TTHERM"} {print $2}' | awk	'BEGIN{FS=";Note"} {print "TTHERM"$1}' > tmp1.$FILE
-grep $filter1 $FILE | grep $filter2 | awk  -v d1="$delim1" 'BEGIN{FS=d1} {print $2}' | awk -v d1="$delim1" -v d2="$delim2" 'BEGIN{FS=d2} {print d1$1}' > tmp1.$FILEname
+# a-la-grep: problem not working if there is more than one appearance in the line
+[ $DBG == "on" ] && grep $filter1 $FILE | grep $filter2 | awk  -v d1="$delim1" 'BEGIN{FS=d1} {print $2}' | awk -v d1="$delim1" -v d2="$delim2" 'BEGIN{FS=d2} {print d1$1}' > tmp1.$FILEname.grep
+# a-la-awk: allows for specifying in which column to specifcally look for...
+matching_column=3
+grep $filter1 $FILE | grep $filter2 |   \
+	awk 	-v matching_col=${matching_column}      \
+		-v target="$filter1"			\
+		'$matching_col ~ target  {print $0}'	|	\
+	awk  -v d1="$delim1" 'BEGIN{FS=d1} {print $2}'	|	\
+	awk  -v d1="$delim1" -v d2="$delim2" 'BEGIN{FS=d2} {print d1$1}' | sed 's/ /_/g' > tmp1.$FILEname
 
 # grab 'Note' and replace 'spaces' with 'underscores (_)'
 #grep $filter1 $FILE | grep $filter2 | awk 'BEGIN{FS="Note="} {print "Note="$2}' | sed 's/ /_/g' > tmp2.$FILE
-grep $filter1 $FILE | grep $filter2 | awk -v d3="$delim3" 'BEGIN{FS=d3} {print d3$2}' | sed 's/ /_/g' > tmp2.$FILEname
+# a-la-grep: problem not working if there is more than one appearance in the line
+[ $DBG == "on" ] && grep $filter1 $FILE | grep $filter2 | awk -v d3="$delim3" 'BEGIN{FS=d3} {print d3$2}' | sed 's/ /_/g' > tmp2.$FILEname.grep
+# a-la-awk: allows for specifying in which column to specifcally look for...
+matching_column=3
+grep $filter1 $FILE | grep $filter2 |	\
+	awk	-v matching_col=${matching_column}	\
+		-v target="$filter1"			\
+		'$matching_col ~ target  {print $0}'	|	\
+	awk -v d3="$delim3" 'BEGIN{FS=d3} {print d3$2}' | sed 's/ /_/g' > tmp2.$FILEname
 
 # compute gene size
-grep $filter1 $FILE | grep $filter2 | awk '{print $5-$4+1}' > tmp3.$FILEname
+# a-la-grep: problem not working if there is more than one appearance in the line
+[ $DBG == "on" ] && grep $filter1 $FILE | grep $filter2 | awk '{print $5-$4+1}' > tmp3.$FILEname.grep
+# a-la-awk: allows for specifying in which column to specifcally look for...
+matching_column=3
+grep $filter1 $FILE | grep $filter2 |	\
+	awk	-v matching_col=${matching_column}	\
+		-v target="$filter1"			\
+		'$matching_col ~ target  {print $0}'	|	awk '{print $5-$4+1}' > tmp3.$FILEname
+
 
 #######################################################################
 
@@ -102,8 +135,7 @@ paste tmp0.$FILEname tmp1.$FILEname tmp2.$FILEname tmp3.$FILEname | sort  -k 1 |
 
 # cleanup: remove temporary files...
 #rm tmp0 tmp1 tmp2 tmp3
-rm -v tmp?.$FILEname
-
+[ $DBG != "on" ] && rm -v tmp?.$FILEname
 
 #######################################################################
 #######################################################################
