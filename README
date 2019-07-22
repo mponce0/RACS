@@ -105,12 +105,16 @@ RACS
  |   └── test
  |        └── lst
  ├── datasets
- |   └── PostProcessing_Genic.xlsx
- |   └── PostProcessing_Intergenic.xlsx
- |   └── IBD1_ORF.xlsx
- |   └── IBD1_Intergenic.xlsx
- |   +-- get_GFF3-files.sh
- |   +-- get_OXYchIPseq-files.sh
+ |   └── TET_PostProcessing_MAC_Genome_Genic.xlsx
+ |   └── TET_PostProcessing_MAC_Genome_Intergenic.xlsx
+ |   └── TET_Ibd1_MAC_Genome_Genic.xlsx
+ |   └── TET_Ibd1_MAC_Genome_Intergenic.xlsx
+ |   └── TET_Ibd1_rDNA_Genic.xlsx
+ |   └── TET_Ibd1_rDNA_Intergenic.xlsx
+ |   └── OXY_Rpb1_MAC_Genome_Genic.xlsx
+ |   └── OXY_Rpb1_MAC_Genome_Intergenic.xlsx
+ |   └── get_GFF3-files.sh
+ |   └── get_OXYchIPseq-files.sh
  ├── hpc
  │   └── submission.pbs
  |   └── submission.slurm
@@ -535,8 +539,20 @@ It requires 3 arguments:
 Alternatively one could use a couple of spreadsheets available in the 'datasets'
 directory, if the user prefers to proceed in an interactive manner.
 See,
-	datasets/PostProcessing_Genic.xlsx
-	datasets/PostProcessing_Intergenic.xlsx
+	datasets/TET_PostProcessing_MAC_Genome_Genic.xlsx
+	datasets/TET_PostProcessing_MAC_Genome_Intergenic.xlsx
+
+We have also included, specific examples of these applied to some of the cases
+we have analized using RACS, ie.
+- for Tetrahymena thermophila:
+	TET_Ibd1_MAC_Genome_Genic.xlsx
+	TET_Ibd1_MAC_Genome_Intergenic.xlsx
+	TET_Ibd1_rDNA_Genic.xlsx
+	TET_Ibd1_rDNA_Intergenic.xlsx
+
+- for Oxytricha trifallax:
+	OXY_Rpb1_MAC_Genome_Genic.xlsx
+	OXY_Rpb1_MAC_Genome_Intergenic.xlsx
 
 
 IV) Processing generic organisms/terms, other than Tetrahymena thermophila
