@@ -2,7 +2,7 @@ RACS: Rapid Analysis of ChIP-Seq data for contig based genomes
 ====  --------------------------------------------------------
 
 These tools are a series of scripts developed to facilitate the analysis
-of ChIP-Seq data and has been applied to the organism T. thermophila.
+of ChIP-Seq data and has been applied to the organism Tetrahymena thermophila.
 
 
 === Content ===
@@ -22,6 +22,8 @@ of ChIP-Seq data and has been applied to the organism T. thermophila.
   - Monitoring RACS runs
   - Downloading datasets
   - Comparing RACS results to MACS
+
+* Notes about the use of RAMdisk and storage space as "working space"
 
 * Examples
 
@@ -385,10 +387,72 @@ More concrete examples and uses are presented in the examples section below.
 
 -------------------------------------------------------------------------------
 
+* Notes about the use of RAMdisk and storage space as "working space"
+
+When using the main script for counting reads, the user has the ability of
+indicating whether to use a faster 'working space' than traditional spinning
+disks (ie. HDD) such as memory (ie. RAMdisk) or a solid state devive (SSD).
+In general, utilizing RAMdisk or SSDs, would result in a speed-up of roughly
+10 to 30%, depending on hardware specifications and the size of the dataset
+to be analyzed.
+The larger the dataset the more IO operations that would be needed, hence
+larger datasets would benefit the most of this.
+This is of course, assuming that the data and subsequent auxiliary files
+created during the analysis will fit in ``memory''. If that is not the case
+then depending on the system and how ti is configured may result in decremental
+performance (e.g. some computer will swap --i.e. start using traditional HDD
+space--) or even crash (for instance, is common in many HPC clusters to do not
+allow for swapping techniques).
+Differences in performance among SSD vs RAMdisk, are almost negligible, again
+depending on hardware specs, this can be upmost of the order of few
+percentages.
+Finally, it should be noticed that by using RAMdisk (i.e. memory) as a working
+space, users will reduce  the overall computational time, however this is will
+ultimately depend upon the amount of memory available as this technique will
+increase the utilization of RAM.
+As a general estimate, at the moment of running the pipeline, users might
+estimate the amount of memory needed by one order of magnitude larger (i.e. x
+10) than the size of the dataset to be processed.
+
+
+The following plot represents the typical behaviour in storage use in the
+"working space" area during a typical run of RACS.
+The vertical axis represents the size used in the 'working space' in units
+of the total size of the initial data (INPUT and IP files, plus reference
+files --gff3 and fasta files--).
+Ie. a value of 8, means 8 times the original size of the initial data.
+The horizontal axis is runtime in seconds, and the '*' represents data points
+showing the trend in use of working space.
+
+
+  9 +-+---------+-----------+-----------+----------+-----------+---------+-+   
+    +           +           +           +          +           +           +   
+  8 +-+                                            ****                  +-+   
+    |                                         ******  ************         |   
+  7 +-+                                     *** **               *       +-+   
+    |                                 *******                    *         |   
+  6 +-+                            ******                        *       +-+   
+    |                              *                             *         |   
+  5 +-+                            *                             *       +-+   
+    |                             **                             *         |   
+    |                             *                              *         |   
+  4 +-+                          **                              *       +-+   
+    |                 ************                               *         |   
+  3 +-+               *                                          *       +-+   
+    |                **                                          *         |   
+  2 +-+              *                                           *       +-+   
+    |              ***                                           *         |   
+  1 ****************                                             *       +-+   
+    *           +           +           +          +           + *         +   
+  0 *-+---------+-----------+-----------+----------+-----------+-**------+-+   
+    0          500         1000        1500       2000        2500        3000 
+
+
+-------------------------------------------------------------------------------
 
 * EXAMPLES
 
-I) calling peaks for ORF
+I) calling reads for genic regions (ORF)
 I.i) the following command will run the countReads.sh script using:
 	- 'data2/_1_MED1_INPUT_S25_L007_R1_001.fasta.gz'  as the file with the INPUT reads
 	- 'data2/_3_MED1_IP_S27_L007_R1_001.fasta.gz' as the file with IP reads
