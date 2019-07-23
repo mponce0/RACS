@@ -39,19 +39,27 @@ Our computational pipeline Rapidly Aanalyze ChIP-Seq data (RACS) can be used
 for any genome that has files containing coordinate sequences of interest.
 Our pipeline provides a unified tool to perform comprehensive ChIP-Seq data
 analysis.
-For instance, with RACS users obtain the co-ordinates of ChIP peaks as well as
+For instance, with RACS users obtain the coordinates of ChIP peaks as well as
 information regarding their relative enrichment across the genome, i.e. number
 of significant peaks found with genic versus non-genic regions.
 RACS is a versatile computational pipeline suitable to analyze ChIP-Seq data
-generated using any model organism. 
+generated using any model organism.
 
+RACS will generate results for genic and intergenic regions, generating as
+final products two CSV (Comma Separated Value) files.
+These are standard text ASCII files, which can be read with any typical
+spreadsheet software or R. 
+
+
+*******************************************************************************
 
 This pipeline is open source under the MIT license, and researchers are welcome
 to use it.
 We will appreciate if users can let us know if they found bugs or could provide
 feedback about its use and experience using RACS.
-Please cite our paper (CITE_RACS) when ever you are using RACS.
+Please cite our paper (https://arxiv.org/abs/1905.02771) when ever you are using RACS.
 
+*******************************************************************************
 
 
 * Requirements
@@ -742,7 +750,7 @@ This pipeline is open source under the MIT license, and researchers are welcome
 to use it.
 We will appreciate if users can let us know if they found bugs or could provide
 feedback about its use and experience using RACS.
-Please cite our paper (CITE_RACS) when ever you are using RACS.
+Please cite our paper (https://arxiv.org/abs/1905.02771) when ever you are using RACS.
 
 Main paper to cite about RACS:
 - "RACS: Rapid Analysis of ChIP-Seq data for contig based genomes",
