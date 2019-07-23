@@ -750,11 +750,12 @@ This pipeline is open source under the MIT license, and researchers are welcome
 to use it.
 We will appreciate if users can let us know if they found bugs or could provide
 feedback about its use and experience using RACS.
+
 Please cite our paper (https://arxiv.org/abs/1905.02771) when ever you are using RACS.
 
 Main paper to cite about RACS:
 - "RACS: Rapid Analysis of ChIP-Seq data for contig based genomes",
-  Ponce et al., BMC under review.
+  Ponce et al., BMC under review -- https://arxiv.org/abs/1905.02771
 
 
 Publications where RACS has been used:
