@@ -1,0 +1,7 @@
+ {
+
+"sonarHost": "https://analysis.apache.org",
+
+"sonarProjectKey": "org.apache.gora:gora"
+
+} 
