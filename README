@@ -85,7 +85,7 @@ Additionally we provide other subdirectories containing the following:
 Our core scripts do not require any additional R packages; however, the
 comparison tools, depending on what format the data to compare with is given,
 might use some spreadsheet reader package.
-For instance, we have included one named \texttt{xlsx} which allows to read
+For instance, we have included one named "xlsx" which allows to read
 proprietary spreadsheet formats.
 To aid the process of identifying and installing the auxiliary R packages
 needed by these tools, we included an R script called "setup.R", that can be
@@ -751,9 +751,8 @@ to use it.
 We will appreciate if users can let us know if they found bugs or could provide
 feedback about its use and experience using RACS.
 
-Please cite our paper (https://arxiv.org/abs/1905.02771) when ever you are using RACS.
+Please cite the following paper when ever you are using RACS:
 
-Main paper to cite about RACS:
 - "RACS: Rapid Analysis of ChIP-Seq data for contig based genomes",
   Ponce et al., BMC under review -- https://arxiv.org/abs/1905.02771
 
