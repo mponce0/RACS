@@ -18,7 +18,17 @@ for (i in origDATA$geneSCFFLD) {
     leregion <- c(leregion, as.numeric(strsplit(region,'-')[[1]][2]))
 }
 tmpTable <- data.frame(lscaffold,lbregion,leregion)
-sortedTABLE <- tmpTable[order(tmpTable$lscaffold,tmpTable$lbregion),]
+
+# the sorting will NOT work for combinations of strings and numbers with an arbitrary number of numnerical digits
+#sortedTABLE <- tmpTable[order(tmpTable$lscaffold,tmpTable$lbregion),]
+#
+# hence we need a more robust and generic approach...
+# I) using R-base functions
+scfSTRG <- as.numeric(gsub("[^[:digit:]]", "", lscaffold))
+names(scfSTRG) <- seq_along(scfSTRG)
+sortedTABLE <- tmpTable[as.numeric(names(sort(scfSTRG))),]
+# II) alternatively one could use an auxiliary library "stringr"
+# eg. str_sort(tmpTable$lscaffold, numeric = TRUE)
 
 return(sortedTABLE)
 }
@@ -30,6 +40,7 @@ return(sortedTABLE)
 dumpData <- function(scaffold,region1,region2, flag) {
    r1 <- as.numeric(region1)+1
    if (region2 != 'xxx') {
+       #DBG output: print(paste("R1/R2:::", region1,region2))
        r2 <- as.numeric(region2)-1
        geneSz <- r2-r1+1
       } else {
@@ -193,11 +204,24 @@ names(inputDATA)[1]<-"geneSCFFLD"
 return(inputDATA)
 }
 #########################################################################
-readRefTable <- function(refFile) {
+readRefTable <- function(refFile,KWRD='contig') {
+
+library(data.table)
 
 refTableOrig <- read.csv(refFile, header=FALSE, sep='\t')
 
-refTable  <- data.frame(refTableOrig[refTableOrig$V3=='supercontig',]$V1, refTableOrig[refTableOrig$V3=='supercontig',]$V5)
+# exact match
+#KWRD='supercontig'	# for T.T.
+#refTable  <- data.frame(refTableOrig[refTableOrig$V3==KWRD,]$V1, refTableOrig[refTableOrig$V3==KWRD,]$V5)
+# partial match
+refTable  <- data.frame(refTableOrig[refTableOrig$V3 %like% KWRD,]$V1, refTableOrig[refTableOrig$V3 %like% KWRD,]$V5)
+
+origSz <- dim(refTable)[1]
+# in case that there duplicated
+refTable <- unique(refTable)
+cat("Original records in ref. table: ", origSz,'\n')
+cat("after eliminated possible duplicates...",dim(refTable)[1],'\n')
+
 names(refTable) <- c("scaffold","supercontig")
 
 return(refTable)
