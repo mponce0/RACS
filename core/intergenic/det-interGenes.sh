@@ -21,6 +21,12 @@
 
 #################################################
 
+
+### TIMERS... #################
+startTime=`date +%s`
+###############################
+
+
 # Setting preamble, detecting scripts location
 scriptsDIR=$( cd `dirname $0` && pwd )
 
@@ -104,5 +110,17 @@ t5=$(time paste  $interGENregions  `cat $SAMPLES | awk '{print "interGENs-"$1".c
 
 # statistics on running times
 echo Total time: $((Ttot+t5))
+
+
+### TIMERS... #################
+endTime=`date +%s`
+
+runtime=$((endTime-startTime))
+
+echo "-----------------------------"
+echo "Total runtime: $runtime secs"
+echo "-----------------------------"
+
+################################
 
 ###########################################################################
