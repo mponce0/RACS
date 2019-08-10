@@ -2,6 +2,13 @@
 
 # auxiliary script to monitor RAMdisk and memory utilization
 #
+# Usage:
+#	racs_monitor.sh <LOC>
+#
+# <LOC> is an optinal argument to specify the location of the working space
+#	indicated to use in the RACS core count_reads.sh pipeline; if it is not
+#	specified then the scrip will look into RAMDISK (/dev/shm) or TMP (/tmp)
+#
 # This script is part of
 #	 RACS v1.0 (2018/2019) -- Open source tools for Analizing ChIP-Seq data         
 #
