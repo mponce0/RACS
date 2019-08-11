@@ -5,17 +5,18 @@
 # Usage:
 #	racs_monitor.sh <LOC>
 #
-# <LOC> is an optinal argument to specify the location of the working space
-#	indicated to use in the RACS core count_reads.sh pipeline; if it is not
-#	specified then the scrip will look into RAMDISK (/dev/shm) or TMP (/tmp)
+# <LOC> is an optional argument to specify the location of the 'working space'
+#	indicated to use in the RACS core script "count_reads.sh" of the
+#	pipeline (see README for details); if the argument is not specified then
+#	the script will look into RAMDISK (/dev/shm) or TMP (/tmp)
 #
 # This script is part of
-#	 RACS v1.0 (2018/2019) -- Open source tools for Analizing ChIP-Seq data         
+#	 RACS v1.0 (2018/2019) -- Open source tools for Rapid Analisys of ChIP-Seq data         
 #
 ###########
 
 # instead of using the system fn, 'watch' (usually included in the OS for Linux)
-# we will  define our own, so it also works for MacOS
+# we will define our own, so it also works for MacOS
 mywatch() {
 	msg=" RACS Monitoring Tool \n-------------------- "
 	t='2'
