@@ -83,7 +83,7 @@ echo -e "\t loaded defns...  <<${filter1}>> :: <<${filter2}>> :: <<${delim1}>> :
 
 # grab scafold and genes' range
 # a-la-grep: problem not working if there is more than one apperance in the line
-[ $DBG == "on" ] && grep $filter1 $FILE | grep $filter2 | awk '{print $1" "$4"-"$5}' > tmp0.$FILEname.grep
+[ -z "$DBG" ] && grep $filter1 $FILE | grep $filter2 | awk '{print $1" "$4"-"$5}' > tmp0.$FILEname.grep
 # a-la-awk: allows for specifying in which column to specifcally look for... 
 matching_column=3
 grep $filter1 $FILE | grep $filter2 |	\
@@ -94,7 +94,7 @@ grep $filter1 $FILE | grep $filter2 |	\
 # grab "TTHERM", ie. *delim1*
 # grep $filter1 $FILE | grep $filter2 | awk 'BEGIN{FS="TTHERM"} {print $2}' | awk	'BEGIN{FS=";Note"} {print "TTHERM"$1}' > tmp1.$FILE
 # a-la-grep: problem not working if there is more than one appearance in the line
-[ $DBG == "on" ] && grep $filter1 $FILE | grep $filter2 | awk  -v d1="$delim1" 'BEGIN{FS=d1} {print $2}' | awk -v d1="$delim1" -v d2="$delim2" 'BEGIN{FS=d2} {print d1$1}' > tmp1.$FILEname.grep
+[ -z "$DBG" ] && grep $filter1 $FILE | grep $filter2 | awk  -v d1="$delim1" 'BEGIN{FS=d1} {print $2}' | awk -v d1="$delim1" -v d2="$delim2" 'BEGIN{FS=d2} {print d1$1}' > tmp1.$FILEname.grep
 # a-la-awk: allows for specifying in which column to specifcally look for...
 matching_column=3
 grep $filter1 $FILE | grep $filter2 |   \
@@ -107,7 +107,7 @@ grep $filter1 $FILE | grep $filter2 |   \
 # grab 'Note' and replace 'spaces' with 'underscores (_)'
 #grep $filter1 $FILE | grep $filter2 | awk 'BEGIN{FS="Note="} {print "Note="$2}' | sed 's/ /_/g' > tmp2.$FILE
 # a-la-grep: problem not working if there is more than one appearance in the line
-[ $DBG == "on" ] && grep $filter1 $FILE | grep $filter2 | awk -v d3="$delim3" 'BEGIN{FS=d3} {print d3$2}' | sed 's/ /_/g' > tmp2.$FILEname.grep
+[ -z "$DBG" ] && grep $filter1 $FILE | grep $filter2 | awk -v d3="$delim3" 'BEGIN{FS=d3} {print d3$2}' | sed 's/ /_/g' > tmp2.$FILEname.grep
 # a-la-awk: allows for specifying in which column to specifcally look for...
 matching_column=3
 grep $filter1 $FILE | grep $filter2 |	\
@@ -118,7 +118,7 @@ grep $filter1 $FILE | grep $filter2 |	\
 
 # compute gene size
 # a-la-grep: problem not working if there is more than one appearance in the line
-[ $DBG == "on" ] && grep $filter1 $FILE | grep $filter2 | awk '{print $5-$4+1}' > tmp3.$FILEname.grep
+[ -z "$DBG" ] && grep $filter1 $FILE | grep $filter2 | awk '{print $5-$4+1}' > tmp3.$FILEname.grep
 # a-la-awk: allows for specifying in which column to specifcally look for...
 matching_column=3
 grep $filter1 $FILE | grep $filter2 |	\
@@ -135,7 +135,7 @@ paste tmp0.$FILEname tmp1.$FILEname tmp2.$FILEname tmp3.$FILEname | sort  -k 1 |
 
 # cleanup: remove temporary files...
 #rm tmp0 tmp1 tmp2 tmp3
-[ $DBG != "on" ] && rm -v tmp?.$FILEname
+[[ ! -z "$DBG" ]] && rm -v tmp?.$FILEname
 
 #######################################################################
 #######################################################################
