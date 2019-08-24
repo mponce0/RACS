@@ -87,7 +87,7 @@ if [[ -f $scriptsDIR/auxs/auxFns.sh ]]; then
         . $scriptsDIR/auxs/auxFns.sh --source-only;
 else
         echo "Error auxiliary file: " $scriptsDIR/auxs/auxFns.sh "NOT found!"
-        exit
+        return
 fi
 #######################################################
 
