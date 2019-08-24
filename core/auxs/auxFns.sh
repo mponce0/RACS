@@ -1,8 +1,9 @@
 #!/bin/bash
 ## -vx
 
-# auxiliary set of functions used in other scripts
-# it includes:
+# Auxiliary set of functions used in other scripts of the RACS pipeline.
+#
+# Main functions included:
 #	- welcome(): RACS welcome message and credits
 #
 #	- helpMsg(): help message describing how to use this script
