@@ -33,8 +33,9 @@ RACSdir="ORF_RACS-"
 location="${ramdisk}/${USER}/${RACSdir}*"
 
 # check whether there is an instance of ORF in the 'location'...
-[ -d $location ] || warning_Msg="WARNING: workspace <<${location}>> not found! \n  If you are not using the standard (default) location, recall to specify it as an argument when executing this tool."
-
+for i in $location; do
+	[ -d "$i" ] || warning_Msg="WARNING: workspace <<${location}>> not found! \n  If you are not using the standard (default) location, recall to specify it as an argument when executing this tool."
+done
 
 ### Commands ##
 ## memory and space utilization ##
