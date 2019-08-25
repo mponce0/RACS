@@ -35,9 +35,21 @@ emailme() {
 	Msg=$2
 
 	# detect mailer program
-	MAILER=`which mail`
+	MAILER=""
+	# check whether 'mail' or 'sendmail' are available in the system
+	mailers="mail sendmail"
+	for cmd in $mailers; do
+		#echo $cmd;
+		if command -v $cmd; then
+			MAILER=$cmd;
+			echo "Using '$MAILER' as mailer program... in $HOSTNAME"
+			break;
+		fi;
+	done
+
 	# check whether there is an program for sending emails...	
-	[[ -z "$MAILER" ]] && echo "An email server should be configured in this sever ($HOST) for this functionality to work!?"
+	[[ -z "$MAILER" ]] && echo "An email server and mailer program such as '$mailers' should be configured in this sever ($HOSTNAME) for this functionality to work!!"
+
 
 	# check that there is a emailer configured and fields of the email are not empty
  	if [ "$MAILER" != "" ] &&  [ "$To" != "" ] && [ "$Subject" != "" ] ;
