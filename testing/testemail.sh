@@ -10,9 +10,15 @@
 
 emailme() {
 # function to send emails, uses 3 arguments:
-	# arg.1: subject
-	# arg.2: message
-	# arg.3: email address (optional) as it will attempt to read it from the "RACS.config" file
+#   arg.1: subject
+#   arg.2: message
+#   arg.3: email address (optional), otherwise it will attempt to read it from the "RACS.config" file
+#
+# ** DISCLAIMER **
+# This functionality requires to have an emailer program --such as, "mail" or #
+# "sendmail"-- properly installed and configured to work. 
+#
+#######
 
 	# file from where to read email address
 	configFile="RACS.config"
