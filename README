@@ -119,7 +119,7 @@ a internet connection!) and type:
 that should clone (download and copy) the latest version of our pipeline in your computer,
 creating a directory called "RACS", containing the following files and sub-directories:
 
-``
+```
 RACS
  ├── AUTHORS
  ├── CITATION
@@ -163,7 +163,7 @@ RACS
      └── racs_monitor.sh
      └── setup.R 
      └── compare.R
-''
+```
 
 
 Updating RACS:
