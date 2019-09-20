@@ -27,6 +27,14 @@ for i in $dirs; do
 		else
 			echo "***** ERROR !!! when checking results failed at $i/$target VS $j/$target"
 			nbrFailedTests=$((nbrFailedTests+1))
+			dir1=`dirname $i`
+			dir2=`dirname $j`
+			datadir=`basename $PWD`
+			diffFile="$dir1-$dir2--$datadir.diffs"
+			echo "### $diffFile"
+			touch $HOME/$diffFile
+			echo -e "geneSz.diff \t INPUTs \t IPs \t ratio" >> $HOME/$diffFile
+			paste $i/$target $j/$target | awk 'BEGIN{TOL=1e-7} function abs(v) {return v < 0 ? -v : v} {print abs($4-$10) "\t" abs($5-$11) "\t" abs($6-$12) "\t" abs($5/($6+TOL))/(($11/($12+TOL))+TOL) }' >>  $HOME/$diffFile
 		fi
 	done;
 done
