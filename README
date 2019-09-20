@@ -25,6 +25,8 @@ of ChIP-Seq data and has been applied to the organism Tetrahymena thermophila.
   - Downloading datasets
   - Comparing RACS results to MACS
 
+* Performance & Parallelism
+
 * Notes about the use of RAMdisk and storage space as "working space"
 
 * Examples
@@ -427,6 +429,27 @@ More concrete examples and uses are presented in the examples section below.
 
 
 -------------------------------------------------------------------------------
+
+* Performance & Parallelism
+
+RACS can utilize multi-core (threading) parallelism for its ORF pipeline.
+This is achieved through the multi-threaded features of BWA.
+A performance and scaling analysis plot is included in the "doc" subdirectory
+of this repository -- see  doc/RACS_scaling.pdf  or  doc/RACS_Scaling.html (this
+last file is an HTML file that can be opened with any browser and will display a
+3D visualization of the scaling analysis with interactive features).
+
+We should also notice that in some cases, depending on the size of the data and
+hardware specifications (ie. number of cores) where the pipeline is executed,
+results could slightly differ depending on how many cores/threads are used.
+Thisi, as disclaimed by BWA developers, is a characteristic of BWA (see
+https://github.com/lh3/bwa/issues/121 ).
+In our analyzes we discovered that this can occur, when using a number of
+threads larger than the actual number of physical cores in the computer (a
+typical technique known as hyper-threading).
+Nevertheless, this is an issue that users should be aware of, although our analysis
+showed that the variations are not statistically significant.
+
 
 * Notes about the use of RAMdisk and storage space as "working space"
 
