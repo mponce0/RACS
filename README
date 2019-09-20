@@ -488,7 +488,7 @@ Ie. a value of 8, means 8 times the original size of the initial data.
 The horizontal axis is runtime in seconds, and the '*' represents data points
 showing the trend in use of working space.
 
-
+```
   9 +-+---------+-----------+-----------+----------+-----------+---------+-+   
     +           +           +           +          +           +           +   
   8 +-+                                            ****                  +-+   
@@ -510,7 +510,7 @@ showing the trend in use of working space.
     *           +           +           +          +           + *         +   
   0 *-+---------+-----------+-----------+----------+-----------+-**------+-+   
     0          500         1000        1500       2000        2500        3000 
-
+```
 
 -------------------------------------------------------------------------------
 
