@@ -81,7 +81,6 @@ sortedDATA <- reshapeTable(inputDATA)
 nbrEntries <- length(sortedDATA$lscaffold)
 
 
-
 #for (i in c(1:nbrEntries)) {
 #    #a <- sortedDATA[i,][1]	#levels(sortedDATA[i,]$lscaffold)[i]
 #    a <-  levels(sortedDATA$lscaffold)[sortedDATA$lscaffold][i]
@@ -158,15 +157,18 @@ for (i in c(1:nbrEntries)) {
               endRegion <- endReg	#strsplit(region,'-')[[1]][2]
               #dumpData(scaffold,'0',beginRegion, lstscfld,lstregion1,lstregion2,lstSize, 1)
               myScfld <- dumpData(scaffold,'0',beginRegion, 1)
+	      if (length(myScfld) > 0 ) {
                lstscfld <- c(lstscfld, myScfld[1])
                lstSize <- c(lstSize, myScfld[4])
                lstregion1 <- c(lstregion1,0+1)
                lstregion2 <- c(lstregion2,beginRegion-1)
+              }
          }
       SCFLD <- scaffold
     }
 	if (length(lstregion1) != length(lstregion2)) stop()
 }
+
 # take care of last case...
 #dumpData(scaffold,endRegion,'xxx', lstscfld,lstregion1,lstregion2,lstSize, 1)
  scfCAP <- scfldCAP(scaffold,refTable)
@@ -176,8 +178,23 @@ for (i in c(1:nbrEntries)) {
  lstregion1 <- c(lstregion1,endRegion+1)
  lstregion2 <- c(lstregion2,scfCAP)
 
+### DEBUG
+#print(interactive())
+#browser()
+print(paste(str(lstscfld),str(lstregion1),str(lstregion2),str(lstSize)))
+#
+#save.image(file="IGR_image.Rdata")
+
+# diagnosis:
+#	lstregion1 has ONE MORE element than the other lists
+#		NOT sure why... --> TESTING remove one element from lstregion1
+if (length(lstregion1) != length(lstregion2)) {
+	warning("lstregion1 (",length(lstregion1),") & lstregion2 (",length(lstregion2),") do NOT match")
+	lstregion1 <- lstregion1[-1]
+}
 interGenes <- data.frame(lstscfld,lstregion1,lstregion2,lstSize)
 names(interGenes) <- c("scaffold",'beggining','end','size')
+
 saveDATA(interGenes,files2process[3])
 
 
