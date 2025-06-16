@@ -39,6 +39,7 @@ return(sortedTABLE)
 
 dumpData <- function(scaffold,region1,region2, flag) {
    r1 <- as.numeric(region1)+1
+   if (length(region2) > 0) {
    if (region2 != 'xxx') {
        #DBG output: print(paste("R1/R2:::", region1,region2))
        r2 <- as.numeric(region2)-1
@@ -58,6 +59,18 @@ dumpData <- function(scaffold,region1,region2, flag) {
    if (flag==1) {
       cat(strng1)
       cat('\n')
+   }
+
+   } else {
+	print("################ region2 empty!!! #################")
+	warning("region2 empty!!!!")
+	strng0 <- paste(scaffold,':',"ISSUE",'-',"ISSUE",sep='')
+	r1 <- "ISSUE"
+	r2 <- "ISSUE"
+	geneSz <- "???"
+	print(c(strng0,r1,r2,geneSz))
+	print("###################################################")
+	return(c())
    }
 
    return(c(strng0,r1,r2,geneSz))
